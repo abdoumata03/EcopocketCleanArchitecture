@@ -1,0 +1,5 @@
+{
+    "files.exclude": {
+        "**/*.freezed.dart": true,
+    }
+}
