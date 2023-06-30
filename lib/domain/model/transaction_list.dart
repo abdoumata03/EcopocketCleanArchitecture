@@ -13,7 +13,7 @@ class TransactionList with _$TransactionList {
   TransactionList addTransaction(final Transaction newTransaction) =>
       copyWith(transactions: [...transactions, newTransaction]);
 
-  TransactionList updateTodo(final Transaction newTransaction) {
+  TransactionList updateTransaction(final Transaction newTransaction) {
     return copyWith(
         transactions: transactions
             .map((transaction) => newTransaction.id == transaction.id

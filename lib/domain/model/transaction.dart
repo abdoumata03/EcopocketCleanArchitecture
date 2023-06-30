@@ -8,7 +8,7 @@ class Transaction with _$Transaction {
     required int id,
     required double amount,
     required String type,
-    required String? category,
+    required int? category,
     required String wallet,
     required String description,
     required DateTime createdTime,

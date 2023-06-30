@@ -24,4 +24,23 @@ class TransactionMapper {
       'createdTime': model.createdTime,
     };
   }
+
+  static TransactionEntity toNewEntityMap(
+    final double amount,
+    final String type,
+    final int? category,
+    final String? wallet,
+    final String description,
+    final DateTime createdTime,
+  ) {
+    return {
+      'id': null,
+      'amount': amount,
+      'type': type,
+      'category': category,
+      'wallet': wallet,
+      'description': description,
+      'createdTime': createdTime.toIso8601String(),
+    };
+  }
 }

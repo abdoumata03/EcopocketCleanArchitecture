@@ -19,7 +19,7 @@ mixin _$Transaction {
   int get id => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
-  String? get category => throw _privateConstructorUsedError;
+  int? get category => throw _privateConstructorUsedError;
   String get wallet => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   DateTime get createdTime => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ abstract class $TransactionCopyWith<$Res> {
       {int id,
       double amount,
       String type,
-      String? category,
+      int? category,
       String wallet,
       String description,
       DateTime createdTime});
@@ -82,7 +82,7 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       wallet: null == wallet
           ? _value.wallet
           : wallet // ignore: cast_nullable_to_non_nullable
@@ -111,7 +111,7 @@ abstract class _$$_TransactionCopyWith<$Res>
       {int id,
       double amount,
       String type,
-      String? category,
+      int? category,
       String wallet,
       String description,
       DateTime createdTime});
@@ -152,7 +152,7 @@ class __$$_TransactionCopyWithImpl<$Res>
       category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       wallet: null == wallet
           ? _value.wallet
           : wallet // ignore: cast_nullable_to_non_nullable
@@ -189,7 +189,7 @@ class _$_Transaction extends _Transaction {
   @override
   final String type;
   @override
-  final String? category;
+  final int? category;
   @override
   final String wallet;
   @override
@@ -235,7 +235,7 @@ abstract class _Transaction extends Transaction {
       {required final int id,
       required final double amount,
       required final String type,
-      required final String? category,
+      required final int? category,
       required final String wallet,
       required final String description,
       required final DateTime createdTime}) = _$_Transaction;
@@ -248,7 +248,7 @@ abstract class _Transaction extends Transaction {
   @override
   String get type;
   @override
-  String? get category;
+  int? get category;
   @override
   String get wallet;
   @override

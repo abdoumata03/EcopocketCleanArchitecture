@@ -17,6 +17,12 @@ class TransactionsDtabaseImplemention implements TransactionsDatabase {
   }
 
   @override
+  Future<TransactionListEntity> allTransactions() async {
+    final db = await database;
+    return db!.query(TransactionTable.tableName);
+  }
+
+  @override
   Future<TransactionEntity> addTransaction(
       TransactionEntity transactionEntity) async {
     final db = await database;
@@ -25,28 +31,25 @@ class TransactionsDtabaseImplemention implements TransactionsDatabase {
       final id = await txn.insert(TransactionTable.tableName, transactionEntity,
           conflictAlgorithm: ConflictAlgorithm.replace);
       final results = await txn.query(TransactionTable.tableName,
-          where: TransactionTable.columnId, whereArgs: [id]);
+          where: '${TransactionTable.columnId} = ?', whereArgs: [id]);
       transaction = results.first;
     });
     return transaction;
   }
 
   @override
-  Future<TransactionListEntity> allTransactions() async {
+  Future<void> updateTransaction(TransactionEntity transactionEntity) async {
     final db = await database;
-    return db!.query(TransactionTable.tableName);
+    final int id = transactionEntity['id'];
+    await db!.update(TransactionTable.tableName, transactionEntity,
+        where: '${TransactionTable.columnId} = ?', whereArgs: [id]);
   }
 
   @override
-  Future<void> deleteTransaction(int id) {
-    // TODO: implement deleteTransaction
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> updateTransaction(TransactionEntity transactionEntity) {
-    // TODO: implement updateTransaction
-    throw UnimplementedError();
+  Future<void> deleteTransaction(int id) async {
+    final db = await database;
+    await db!.delete(TransactionTable.tableName,
+        where: '${TransactionTable.tableName} = ?', whereArgs: [id]);
   }
 
   Future<Database> _initDatabase() async {
