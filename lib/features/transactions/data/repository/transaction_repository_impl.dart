@@ -1,9 +1,9 @@
-import 'package:ecopocket_clean_architecture/data/datasources/local/transactions_database.dart';
-import 'package:ecopocket_clean_architecture/data/mapper/transaction_list_mapper.dart';
-import 'package:ecopocket_clean_architecture/data/mapper/transaction_mapper.dart';
-import 'package:ecopocket_clean_architecture/domain/model/transaction.dart';
-import 'package:ecopocket_clean_architecture/domain/model/transaction_list.dart';
-import 'package:ecopocket_clean_architecture/domain/repository/transactions_repository.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/data/datasources/local/transactions_database.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/data/mapper/transaction_list_mapper.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/data/mapper/transaction_mapper.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction_list.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/domain/repository/transactions_repository.dart';
 
 class TransactionsRepositoryImpl implements TransactionsRepository {
   final TransactionsDatabase database;

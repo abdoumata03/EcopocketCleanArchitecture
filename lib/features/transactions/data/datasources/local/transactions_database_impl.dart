@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:ecopocket_clean_architecture/data/datasources/local/tables/categories_table.dart';
-import 'package:ecopocket_clean_architecture/data/datasources/local/tables/settings_table.dart';
-import 'package:ecopocket_clean_architecture/data/datasources/local/tables/transactions_table.dart';
-import 'package:ecopocket_clean_architecture/data/datasources/local/transactions_database.dart';
-import 'package:ecopocket_clean_architecture/data/entity/transactions_entity.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/data/datasources/local/tables/categories_table.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/data/datasources/local/tables/settings_table.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/data/datasources/local/tables/transactions_table.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/data/datasources/local/transactions_database.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/data/entity/transactions_entity.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 

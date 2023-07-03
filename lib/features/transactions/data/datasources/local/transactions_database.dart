@@ -1,4 +1,4 @@
-import 'package:ecopocket_clean_architecture/data/entity/transactions_entity.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/data/entity/transactions_entity.dart';
 
 abstract class TransactionsDatabase {
   Future<TransactionListEntity> allTransactions();

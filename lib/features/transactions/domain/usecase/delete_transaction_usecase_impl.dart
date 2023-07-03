@@ -1,5 +1,5 @@
-import 'package:ecopocket_clean_architecture/domain/repository/transactions_repository.dart';
-import 'package:ecopocket_clean_architecture/domain/usecase/delete_transaction_usecase.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/domain/repository/transactions_repository.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/domain/usecase/delete_transaction_usecase.dart';
 
 class DeleteTransactionUseCaseImpl implements DeleteTransactionUseCase {
   final TransactionsRepository _repository;

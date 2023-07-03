@@ -1,4 +1,4 @@
-import 'package:ecopocket_clean_architecture/domain/model/transaction.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction.dart';
 import "package:freezed_annotation/freezed_annotation.dart";
 
 part 'transaction_list.freezed.dart';

@@ -1,6 +1,6 @@
-import 'package:ecopocket_clean_architecture/domain/model/transaction.dart';
-import 'package:ecopocket_clean_architecture/domain/repository/transactions_repository.dart';
-import 'package:ecopocket_clean_architecture/domain/usecase/create_transaction_usecase.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/domain/repository/transactions_repository.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/domain/usecase/create_transaction_usecase.dart';
 
 class CreateTransactionUseCaseImpl implements CreateTransactionUseCase {
   final TransactionsRepository _repository;

@@ -1,5 +1,5 @@
-import 'package:ecopocket_clean_architecture/domain/model/transaction.dart';
-import 'package:ecopocket_clean_architecture/domain/model/transaction_list.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction_list.dart';
 
 abstract class TransactionsRepository {
   Future<TransactionList> getTransactionList();
