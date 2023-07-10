@@ -9,7 +9,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_riverpod: ^2.3.6
+  flutter_screenutil: ^5.8.4
+  flutter_svg: ^2.0.7
   freezed_annotation: ^2.2.0
+  google_fonts: ^5.1.0
+  intl: ^0.18.1
   path: ^1.8.3
   riverpod: ^2.3.6
   sqflite: ^2.2.8+4
@@ -25,6 +30,11 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+
+  assets:
+    - google_fonts/
+    - assets/illustrations/
+    - assets/icons/
 
 
 scripts:

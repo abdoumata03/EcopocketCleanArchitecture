@@ -9,7 +9,7 @@ class Transaction with _$Transaction {
     required double amount,
     required String type,
     required int? category,
-    required String wallet,
+    required String? wallet,
     required String description,
     required DateTime createdTime,
   }) = _Transaction;

@@ -18,7 +18,7 @@ class TransactionTable {
         $columnCategoryId INTEGER,
         $columnWallet TEXT, 
         $columnDescription TEXT,
-        $columnTime TEXT
+        $columnTime TEXT,
         FOREIGN KEY ($columnCategoryId) REFERENCES ${CategoryTable.tableName}(${CategoryTable.columnId})
       )
     ''';

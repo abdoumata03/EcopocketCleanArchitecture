@@ -20,7 +20,7 @@ mixin _$Transaction {
   double get amount => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   int? get category => throw _privateConstructorUsedError;
-  String get wallet => throw _privateConstructorUsedError;
+  String? get wallet => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   DateTime get createdTime => throw _privateConstructorUsedError;
 
@@ -40,7 +40,7 @@ abstract class $TransactionCopyWith<$Res> {
       double amount,
       String type,
       int? category,
-      String wallet,
+      String? wallet,
       String description,
       DateTime createdTime});
 }
@@ -62,7 +62,7 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
     Object? amount = null,
     Object? type = null,
     Object? category = freezed,
-    Object? wallet = null,
+    Object? wallet = freezed,
     Object? description = null,
     Object? createdTime = null,
   }) {
@@ -83,10 +83,10 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as int?,
-      wallet: null == wallet
+      wallet: freezed == wallet
           ? _value.wallet
           : wallet // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -112,7 +112,7 @@ abstract class _$$_TransactionCopyWith<$Res>
       double amount,
       String type,
       int? category,
-      String wallet,
+      String? wallet,
       String description,
       DateTime createdTime});
 }
@@ -132,7 +132,7 @@ class __$$_TransactionCopyWithImpl<$Res>
     Object? amount = null,
     Object? type = null,
     Object? category = freezed,
-    Object? wallet = null,
+    Object? wallet = freezed,
     Object? description = null,
     Object? createdTime = null,
   }) {
@@ -153,10 +153,10 @@ class __$$_TransactionCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as int?,
-      wallet: null == wallet
+      wallet: freezed == wallet
           ? _value.wallet
           : wallet // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -191,7 +191,7 @@ class _$_Transaction extends _Transaction {
   @override
   final int? category;
   @override
-  final String wallet;
+  final String? wallet;
   @override
   final String description;
   @override
@@ -236,7 +236,7 @@ abstract class _Transaction extends Transaction {
       required final double amount,
       required final String type,
       required final int? category,
-      required final String wallet,
+      required final String? wallet,
       required final String description,
       required final DateTime createdTime}) = _$_Transaction;
   const _Transaction._() : super._();
@@ -250,7 +250,7 @@ abstract class _Transaction extends Transaction {
   @override
   int? get category;
   @override
-  String get wallet;
+  String? get wallet;
   @override
   String get description;
   @override

@@ -5,12 +5,12 @@ class TransactionMapper {
   static Transaction toModel(final TransactionEntity entity) {
     return Transaction(
         id: entity['id'],
-        amount: entity['amount'],
+        amount: entity['amount'].toDouble(),
         type: entity['type'],
         category: entity['category'],
         wallet: entity['wallet'],
         description: entity['description'],
-        createdTime: entity['createdTime']);
+        createdTime: DateTime.parse(entity['time']));
   }
 
   static TransactionEntity toMap(final Transaction model) {
@@ -21,7 +21,7 @@ class TransactionMapper {
       'category': model.category,
       'wallet': model.wallet,
       'description': model.description,
-      'createdTime': model.createdTime,
+      'time': model.createdTime,
     };
   }
 
@@ -40,7 +40,7 @@ class TransactionMapper {
       'category': category,
       'wallet': wallet,
       'description': description,
-      'createdTime': createdTime.toIso8601String(),
+      'time': createdTime.toIso8601String(),
     };
   }
 }
