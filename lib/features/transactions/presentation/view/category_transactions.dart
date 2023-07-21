@@ -2,6 +2,7 @@ import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/constants/styles.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/application/category_info_service.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/category_info.dart';
+import 'package:ecopocket_clean_architecture/localization/categories_localizations.dart';
 import 'package:ecopocket_clean_architecture/shared/widgets/async_value_widget.dart';
 import 'package:ecopocket_clean_architecture/utils/amount_formatter.dart';
 import 'package:ecopocket_clean_architecture/utils/date_periods.dart';
@@ -87,7 +88,9 @@ class CategoryTransactions extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(category.name,
+                        Text(
+                            CategoriesLocalizations.getCategoryName(
+                                context, category.name),
                             style: GoogleFonts.jost(
                                 color: kGray[900],
                                 fontWeight: FontWeight.w500)),

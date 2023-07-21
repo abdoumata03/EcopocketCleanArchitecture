@@ -1,6 +1,8 @@
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/constants/styles.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/category_info.dart';
+import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
+import 'package:ecopocket_clean_architecture/localization/categories_localizations.dart';
 import 'package:ecopocket_clean_architecture/routing/app_router.dart';
 import 'package:ecopocket_clean_architecture/utils/amount_formatter.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +28,9 @@ class CategoryInfoListItem extends ConsumerWidget {
     String getCountAdjective() {
       final count = category.count;
       if (count == 1) {
-        return 'entry';
+        return context.loc.entry;
       } else {
-        return 'entries';
+        return context.loc.entries;
       }
     }
 
@@ -63,7 +65,8 @@ class CategoryInfoListItem extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  category.name,
+                  CategoriesLocalizations.getCategoryName(
+                      context, category.name),
                   style: GoogleFonts.jost(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w500,

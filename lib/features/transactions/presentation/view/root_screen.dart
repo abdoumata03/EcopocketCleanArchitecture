@@ -5,6 +5,7 @@ import 'package:ecopocket_clean_architecture/features/analytics/presentation/vie
 import 'package:ecopocket_clean_architecture/features/transactions/domain/repository/transactions_repository.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/home/home_screen.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/widgets/custom_navigation_bar.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/widgets/drawer.dart';
 import 'package:ecopocket_clean_architecture/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,7 +29,7 @@ class RootPage extends ConsumerWidget {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
-        drawer: const Drawer(),
+        drawer: const MyDrawer(),
         floatingActionButton: FloatingActionButton(
           backgroundColor: kBlue,
           shape: RoundedRectangleBorder(

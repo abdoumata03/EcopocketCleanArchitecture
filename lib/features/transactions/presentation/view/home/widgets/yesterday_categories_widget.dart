@@ -1,6 +1,7 @@
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/application/category_info_service.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/home/widgets/category_info_list_item.dart';
+import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:ecopocket_clean_architecture/shared/widgets/async_value_widget.dart';
 import 'package:ecopocket_clean_architecture/utils/amount_formatter.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class YesterdaysCategories extends ConsumerWidget {
         Row(
           children: [
             Text(
-              'Yesterday',
+              context.loc.yesterday,
               style: GoogleFonts.jost(color: kGray[500], fontSize: 16.sp),
             ),
             const Spacer(),

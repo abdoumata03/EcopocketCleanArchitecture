@@ -1,7 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-import 'dart:developer';
-
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/constants/styles.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/analytics_controller.dart';
@@ -12,7 +10,7 @@ import 'package:ecopocket_clean_architecture/features/analytics/presentation/vie
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/view/widgets/stat_item_list_skeleton.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/view/widgets/toggle_item.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/application/category_info_service.dart';
-import 'package:ecopocket_clean_architecture/localization/string_hardcoded.dart';
+import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:ecopocket_clean_architecture/shared/widgets/empty_transactions.dart';
 import 'package:ecopocket_clean_architecture/utils/amount_formatter.dart';
 
@@ -100,7 +98,9 @@ class _AnalyticsState extends ConsumerState {
                 ),
                 SizedBox(height: 10.h),
                 Text(
-                  'Total spent this week'.hardcoded,
+                  (selectedIndex == 0)
+                      ? context.loc.totalSpentThisWeek
+                      : context.loc.totalSpentThisMonth,
                   style: GoogleFonts.jost(color: kGray[400]),
                 ),
                 SizedBox(height: 40.h),
@@ -120,7 +120,7 @@ class _AnalyticsState extends ConsumerState {
           Row(
             children: [
               ToggleItem(
-                text: 'Week',
+                text: context.loc.week,
                 selected: selectedIndex == 0,
                 onTap: () async {
                   setState(() {
@@ -136,7 +136,7 @@ class _AnalyticsState extends ConsumerState {
               ),
               SizedBox(width: 10.w),
               ToggleItem(
-                text: 'Month',
+                text: context.loc.month,
                 selected: selectedIndex == 1,
                 onTap: () {
                   setState(() {

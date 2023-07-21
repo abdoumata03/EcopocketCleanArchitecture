@@ -1,6 +1,7 @@
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/constants/styles.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/note_controller.dart';
+import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,7 +31,7 @@ class NoteTextField extends ConsumerWidget {
           ref.read(noteProvider.notifier).setNote(value);
         },
         decoration: InputDecoration(
-          hintText: 'Add a note',
+          hintText: context.loc.addNote,
           hintStyle: GoogleFonts.jost(
               color: kGray[400], fontSize: 18.sp, fontWeight: FontWeight.w500),
           filled: true,

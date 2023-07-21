@@ -3,6 +3,7 @@ import 'package:ecopocket_clean_architecture/features/transactions/domain/model/
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/date_filter_controller.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/transactions_controller.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/all_transactions/widgets/transaction_item_widget.dart';
+import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:ecopocket_clean_architecture/shared/widgets/async_value_widget.dart';
 import 'package:ecopocket_clean_architecture/shared/widgets/empty_transactions.dart';
 import 'package:ecopocket_clean_architecture/utils/date_formatter.dart';
@@ -43,7 +44,7 @@ class _AllTransactionsState extends ConsumerState {
               onPressed: () => context.pop(),
               icon: SvgPicture.asset('assets/icons/back.svg'),
             ),
-            Text('Transactions',
+            Text(context.loc.transactions,
                 style: GoogleFonts.jost(
                   color: kGray[900],
                   fontSize: 18.sp,
@@ -105,8 +106,8 @@ class _AllTransactionsState extends ConsumerState {
                   value: transactions,
                   data: (data) {
                     if (data.length == 0) {
-                      return const EmptyTransactions(
-                          message: "No transactions to show!");
+                      return EmptyTransactions(
+                          message: context.loc.noTransactions);
                     }
                     return ListView.separated(
                         shrinkWrap: true,

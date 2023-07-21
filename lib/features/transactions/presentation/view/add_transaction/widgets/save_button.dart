@@ -3,6 +3,7 @@ import 'package:ecopocket_clean_architecture/features/transactions/presentation/
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/category_controller.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/note_controller.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/save_transaction_controller.dart';
+import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,7 +40,7 @@ class SaveTransactionButton extends ConsumerWidget {
         ),
         child: Center(
           child: Text(
-            'Save',
+            context.loc.save,
             style: GoogleFonts.jost(
               color: (amount != '0' && category != null)
                   ? Colors.white

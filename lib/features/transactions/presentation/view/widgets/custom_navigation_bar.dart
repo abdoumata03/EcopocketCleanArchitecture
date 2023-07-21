@@ -1,5 +1,6 @@
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/constants/styles.dart';
+import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,14 +33,14 @@ class CustomBottomNavigationBar extends ConsumerWidget {
             index: 0,
             icon: 'assets/icons/home.svg',
             selectedIcon: 'assets/icons/home_filled.svg',
-            page: 'Home',
+            page: context.loc.home,
           ),
           buildAppBarItem(
             ref: ref,
             index: 1,
             icon: 'assets/icons/analytics.svg',
             selectedIcon: 'assets/icons/analytics_filled.svg',
-            page: 'Analytics',
+            page: context.loc.analytics,
           ),
           placeholder,
           buildAppBarItem(
@@ -47,14 +48,14 @@ class CustomBottomNavigationBar extends ConsumerWidget {
             index: 2,
             icon: 'assets/icons/budget.svg',
             selectedIcon: 'assets/icons/budget_filled.svg',
-            page: 'Budget',
+            page: context.loc.budget,
           ),
           buildAppBarItem(
             ref: ref,
             index: 3,
             icon: 'assets/icons/profile.svg',
             selectedIcon: 'assets/icons/profile_filled.svg',
-            page: 'Profile',
+            page: context.loc.profile,
           ),
         ],
       ),

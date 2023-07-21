@@ -3,6 +3,7 @@
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/application/category_info_service.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/category_info_list.dart';
+import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:ecopocket_clean_architecture/shared/widgets/empty_transactions.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/home/widgets/spent_this_week.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/home/widgets/today_categories_widget.dart';
@@ -61,12 +62,14 @@ class HomePage extends ConsumerWidget {
                 const SpentThisWeek(),
                 SizedBox(height: 14.h),
                 buildViewAllTransactions(
-                    onTap: () => context.push("/all_transactions")),
+                  onTap: () => context.push("/all_transactions"),
+                  title: context.loc.viewAllTransactions,
+                ),
                 SizedBox(height: 14.h),
                 (todaysCategoriesList.categoryInfoList.isEmpty &&
                         yesterdaysCategoriesList.categoryInfoList.isEmpty)
-                    ? const EmptyTransactions(
-                        message: 'You have no recent transactions!',
+                    ? EmptyTransactions(
+                        message: context.loc.noRecentTransactions,
                       )
                     : Column(children: [
                         if (todaysCategoriesList.categoryInfoList.isNotEmpty)

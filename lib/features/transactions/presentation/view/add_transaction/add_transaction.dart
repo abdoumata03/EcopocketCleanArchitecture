@@ -9,6 +9,7 @@ import 'package:ecopocket_clean_architecture/features/transactions/presentation/
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/add_transaction/widgets/note_button.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/add_transaction/widgets/note_text_field.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/add_transaction/widgets/save_button.dart';
+import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -78,7 +79,7 @@ class _NewTransactionState extends ConsumerState {
                   child: TextButton(
                       onPressed: () => context.pop(),
                       child: Text(
-                        "Cancel",
+                        context.loc.cancel,
                         style: GoogleFonts.jost(
                             fontSize: 18.sp,
                             fontWeight: FontWeight.w500,
@@ -88,7 +89,7 @@ class _NewTransactionState extends ConsumerState {
                 Align(
                   alignment: Alignment.center,
                   child: Text(
-                    type,
+                    context.loc.expense,
                     style: GoogleFonts.jost(
                         color: kGray[900],
                         fontSize: 18.sp,

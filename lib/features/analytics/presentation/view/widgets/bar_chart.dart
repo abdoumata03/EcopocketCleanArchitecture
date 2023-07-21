@@ -4,6 +4,7 @@ import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/barchart_controller.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/max_value_controller.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/period_controller.dart';
+import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:ecopocket_clean_architecture/utils/amount_formatter.dart';
 import 'package:ecopocket_clean_architecture/utils/date_periods.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -155,7 +156,15 @@ class _CustomBarChartState extends ConsumerState {
   }
 
   Widget weeklyBottomTitles(double value, TitleMeta meta) {
-    final weekTitles = <String>['Su', 'Mn', 'Te', 'Wd', 'Tu', 'Fr', 'St'];
+    final weekTitles = <String>[
+      context.loc.sunday,
+      context.loc.monday,
+      context.loc.tuesday,
+      context.loc.wednesday,
+      context.loc.thursday,
+      context.loc.friday,
+      context.loc.saturday
+    ];
     bool isHighlighted() {
       bool isTouched = value.toInt() == touchedIndex;
       if (isTouched) return true;

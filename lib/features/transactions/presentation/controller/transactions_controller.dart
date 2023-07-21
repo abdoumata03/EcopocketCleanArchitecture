@@ -1,7 +1,5 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'dart:developer';
-
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction_list.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/module.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/date_filter_controller.dart';

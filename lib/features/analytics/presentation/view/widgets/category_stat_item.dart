@@ -1,6 +1,8 @@
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/touched_index_controller.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/category_info.dart';
+import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
+import 'package:ecopocket_clean_architecture/localization/categories_localizations.dart';
 import 'package:ecopocket_clean_architecture/utils/amount_formatter.dart';
 import 'package:ecopocket_clean_architecture/utils/date_periods.dart';
 import 'package:flutter/material.dart';
@@ -46,14 +48,14 @@ class CategoryStatItem extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                name,
+                CategoriesLocalizations.getCategoryName(context, name),
                 style: GoogleFonts.jost(
                   color: kGray[900],
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              Text('$count transactions',
+              Text('$count ${context.loc.transactions}',
                   style: GoogleFonts.jost(color: kGray[400]))
             ],
           ),

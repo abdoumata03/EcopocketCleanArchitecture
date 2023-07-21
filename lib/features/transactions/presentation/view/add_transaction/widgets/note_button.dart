@@ -2,6 +2,7 @@
 
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/note_controller.dart';
+import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,7 +31,7 @@ class NoteButton extends ConsumerWidget {
             ),
             SizedBox(width: 8.w),
             Text(
-              note.isEmpty ? 'Add note' : note,
+              note.isEmpty ? context.loc.addNote : note,
               style: GoogleFonts.jost(
                   color: note.isEmpty ? kGray[500] : kGray[900],
                   fontSize: 18.sp,

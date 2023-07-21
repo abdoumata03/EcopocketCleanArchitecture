@@ -5,7 +5,10 @@ part 'date_filter_controller.g.dart';
 
 @riverpod
 class DateFilterController extends _$DateFilterController {
-  DateTimeRange? build() {}
+  @override
+  DateTimeRange? build() {
+    return null;
+  }
 
   void setDateRange(dataRange) {
     state = dataRange;
