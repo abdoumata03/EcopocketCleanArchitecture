@@ -1,26 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'transactions_controller.dart';
+part of 'locale_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$transactionsControllerHash() =>
-    r'dbcb77a1d8ce34fa7456a41ccb145fb70bb03ec0';
+String _$localeControllerHash() => r'8fab267cbab5b8c0839c1a502da0e6f9017bf4fc';
 
-/// See also [TransactionsController].
-@ProviderFor(TransactionsController)
-final transactionsControllerProvider = AutoDisposeAsyncNotifierProvider<
-    TransactionsController, TransactionList>.internal(
-  TransactionsController.new,
-  name: r'transactionsControllerProvider',
+/// See also [LocaleController].
+@ProviderFor(LocaleController)
+final localeControllerProvider =
+    AutoDisposeNotifierProvider<LocaleController, Locale>.internal(
+  LocaleController.new,
+  name: r'localeControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$transactionsControllerHash,
+      : _$localeControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$TransactionsController = AutoDisposeAsyncNotifier<TransactionList>;
+typedef _$LocaleController = AutoDisposeNotifier<Locale>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

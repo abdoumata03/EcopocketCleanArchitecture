@@ -7,7 +7,7 @@ part of 'date_filter_controller.dart';
 // **************************************************************************
 
 String _$dateFilterControllerHash() =>
-    r'c9bd8b40985b3c1c8dd2fbfb25d9a90fbf993953';
+    r'3b0000bd16337ad75908ba20df1e1ad4b8c600c3';
 
 /// See also [DateFilterController].
 @ProviderFor(DateFilterController)
