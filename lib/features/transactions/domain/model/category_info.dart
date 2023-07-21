@@ -12,6 +12,7 @@ class CategoryInfo with _$CategoryInfo {
     required String icon,
     required double total,
     required double? budget,
+    required double? percentage,
   }) = _CategoryInfo;
 
   const CategoryInfo._();

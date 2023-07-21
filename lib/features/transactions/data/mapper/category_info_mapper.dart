@@ -11,6 +11,7 @@ class CategoryInfoMapper {
       budget: map['budget'],
       color: map['color'],
       icon: map['icon'],
+      percentage: map['percentage'],
     );
   }
 
@@ -23,6 +24,7 @@ class CategoryInfoMapper {
       'budget': categoryInfo.budget,
       'color': categoryInfo.color,
       'icon': categoryInfo.icon,
+      'percentage': categoryInfo.percentage,
     };
   }
 }

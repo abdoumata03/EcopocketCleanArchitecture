@@ -6,5 +6,5 @@ part 'date_formatter.g.dart';
 @riverpod
 DateFormat dateFormatter(DateFormatterRef ref) {
   /// Date formatter to be used in the app.
-  return DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS");
+  return DateFormat("d MMM yyyy");
 }

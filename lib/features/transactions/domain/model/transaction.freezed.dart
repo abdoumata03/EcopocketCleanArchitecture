@@ -16,11 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Transaction {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   int? get category => throw _privateConstructorUsedError;
   String? get wallet => throw _privateConstructorUsedError;
+  String? get categoryName => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   DateTime get createdTime => throw _privateConstructorUsedError;
 
@@ -36,11 +37,12 @@ abstract class $TransactionCopyWith<$Res> {
       _$TransactionCopyWithImpl<$Res, Transaction>;
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       double amount,
       String type,
       int? category,
       String? wallet,
+      String? categoryName,
       String description,
       DateTime createdTime});
 }
@@ -58,19 +60,20 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? amount = null,
     Object? type = null,
     Object? category = freezed,
     Object? wallet = freezed,
+    Object? categoryName = freezed,
     Object? description = null,
     Object? createdTime = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
@@ -86,6 +89,10 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
       wallet: freezed == wallet
           ? _value.wallet
           : wallet // ignore: cast_nullable_to_non_nullable
+              as String?,
+      categoryName: freezed == categoryName
+          ? _value.categoryName
+          : categoryName // ignore: cast_nullable_to_non_nullable
               as String?,
       description: null == description
           ? _value.description
@@ -108,11 +115,12 @@ abstract class _$$_TransactionCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       double amount,
       String type,
       int? category,
       String? wallet,
+      String? categoryName,
       String description,
       DateTime createdTime});
 }
@@ -128,19 +136,20 @@ class __$$_TransactionCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? amount = null,
     Object? type = null,
     Object? category = freezed,
     Object? wallet = freezed,
+    Object? categoryName = freezed,
     Object? description = null,
     Object? createdTime = null,
   }) {
     return _then(_$_Transaction(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
@@ -156,6 +165,10 @@ class __$$_TransactionCopyWithImpl<$Res>
       wallet: freezed == wallet
           ? _value.wallet
           : wallet // ignore: cast_nullable_to_non_nullable
+              as String?,
+      categoryName: freezed == categoryName
+          ? _value.categoryName
+          : categoryName // ignore: cast_nullable_to_non_nullable
               as String?,
       description: null == description
           ? _value.description
@@ -178,12 +191,13 @@ class _$_Transaction extends _Transaction {
       required this.type,
       required this.category,
       required this.wallet,
+      this.categoryName,
       required this.description,
       required this.createdTime})
       : super._();
 
   @override
-  final int id;
+  final int? id;
   @override
   final double amount;
   @override
@@ -193,13 +207,15 @@ class _$_Transaction extends _Transaction {
   @override
   final String? wallet;
   @override
+  final String? categoryName;
+  @override
   final String description;
   @override
   final DateTime createdTime;
 
   @override
   String toString() {
-    return 'Transaction(id: $id, amount: $amount, type: $type, category: $category, wallet: $wallet, description: $description, createdTime: $createdTime)';
+    return 'Transaction(id: $id, amount: $amount, type: $type, category: $category, wallet: $wallet, categoryName: $categoryName, description: $description, createdTime: $createdTime)';
   }
 
   @override
@@ -213,6 +229,8 @@ class _$_Transaction extends _Transaction {
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.wallet, wallet) || other.wallet == wallet) &&
+            (identical(other.categoryName, categoryName) ||
+                other.categoryName == categoryName) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.createdTime, createdTime) ||
@@ -221,7 +239,7 @@ class _$_Transaction extends _Transaction {
 
   @override
   int get hashCode => Object.hash(runtimeType, id, amount, type, category,
-      wallet, description, createdTime);
+      wallet, categoryName, description, createdTime);
 
   @JsonKey(ignore: true)
   @override
@@ -232,17 +250,18 @@ class _$_Transaction extends _Transaction {
 
 abstract class _Transaction extends Transaction {
   const factory _Transaction(
-      {required final int id,
+      {required final int? id,
       required final double amount,
       required final String type,
       required final int? category,
       required final String? wallet,
+      final String? categoryName,
       required final String description,
       required final DateTime createdTime}) = _$_Transaction;
   const _Transaction._() : super._();
 
   @override
-  int get id;
+  int? get id;
   @override
   double get amount;
   @override
@@ -251,6 +270,8 @@ abstract class _Transaction extends Transaction {
   int? get category;
   @override
   String? get wallet;
+  @override
+  String? get categoryName;
   @override
   String get description;
   @override

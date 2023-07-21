@@ -8,6 +8,7 @@ class TransactionMapper {
         amount: entity['amount'].toDouble(),
         type: entity['type'],
         category: entity['category'],
+        categoryName: entity['category_name'],
         wallet: entity['wallet'],
         description: entity['description'],
         createdTime: DateTime.parse(entity['time']));

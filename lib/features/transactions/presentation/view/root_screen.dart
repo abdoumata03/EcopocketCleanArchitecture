@@ -1,12 +1,11 @@
 // ignore_for_file: unused_result
 
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
-import 'package:ecopocket_clean_architecture/features/transactions/application/category_info_service.dart';
+import 'package:ecopocket_clean_architecture/features/analytics/presentation/view/analytics.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/repository/transactions_repository.dart';
-import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/home_screen.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/home/home_screen.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/widgets/custom_navigation_bar.dart';
-import 'package:ecopocket_clean_architecture/utils/date_periods.dart';
-import 'package:ecopocket_clean_architecture/utils/date_range_provider.dart';
+import 'package:ecopocket_clean_architecture/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,6 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:developer';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RootPage extends ConsumerWidget {
@@ -22,13 +22,13 @@ class RootPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentIndex = ref.watch(pageIndexChangerProvider);
-    final repo = ref.watch(transactionsRepositoryProvider);
     return AnnotatedRegion(
       value: SystemUiOverlayStyle(
         statusBarColor: kGray[50],
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        drawer: const Drawer(),
         floatingActionButton: FloatingActionButton(
           backgroundColor: kBlue,
           shape: RoundedRectangleBorder(
@@ -38,7 +38,10 @@ class RootPage extends ConsumerWidget {
               color: Colors.white,
             ),
           ),
-          onPressed: () => showTransactionTypesBottomSheet(context, repo, ref),
+          onPressed: () {
+            context.pushNamed(AppRoute.newTransaction.name,
+                pathParameters: {'type': 'Expense'});
+          },
           child: const Icon(Icons.add),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -48,7 +51,7 @@ class RootPage extends ConsumerWidget {
           index: currentIndex,
           children: const [
             Center(child: HomePage()),
-            Center(child: Text('Analytics Page')),
+            Center(child: Analytics()),
             Center(child: Text('Budget Page')),
             Center(child: Text('Profile Page'))
           ],
@@ -83,16 +86,9 @@ class RootPage extends ConsumerWidget {
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        await repo.createTransaction(
-                            1004, "Expense", 1, null, "test", DateTime.now());
-                        ref.refresh(getTodaysCategoriesInfoListProvider);
-                        ref.refresh(todaysTotalProvider);
-                        final period = ref
-                            .watch(getDateRangeProvider(TimePeriod.thisWeek));
-                        ref.refresh(getSpendingsProvider(range: period));
-
-                        final cats = await repo.getTodaysCategoriesInfo();
-                        log(cats.toString());
+                        context.pop();
+                        context.pushNamed(AppRoute.newTransaction.name,
+                            pathParameters: {'type': 'Expense'});
                       },
                       style: ButtonStyle(
                           alignment: Alignment.bottomCenter,

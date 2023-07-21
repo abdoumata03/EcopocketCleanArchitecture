@@ -6,7 +6,7 @@ part of 'date_range_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getDateRangeHash() => r'daceec782a66faa9b5c1b4934b0cde9af3b5daff';
+String _$getDateRangeHash() => r'b7c21ae068f86d326c44da4248bdf3948e502933';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,7 +29,7 @@ class _SystemHash {
   }
 }
 
-typedef GetDateRangeRef = AutoDisposeProviderRef<DateRange>;
+typedef GetDateRangeRef = ProviderRef<DateRange>;
 
 /// See also [getDateRange].
 @ProviderFor(getDateRange)
@@ -74,7 +74,7 @@ class GetDateRangeFamily extends Family<DateRange> {
 }
 
 /// See also [getDateRange].
-class GetDateRangeProvider extends AutoDisposeProvider<DateRange> {
+class GetDateRangeProvider extends Provider<DateRange> {
   /// See also [getDateRange].
   GetDateRangeProvider(
     this.period,

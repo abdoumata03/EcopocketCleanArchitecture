@@ -1,0 +1,19 @@
+{
+  "home": "Home",
+  "analytics": "Analytics",
+  "budget": "Budget",
+  "profile": "Profile",
+  "transactions": "Transactions",
+  "transaction": "Transaction",
+  "spentThisWeek": "Spent this week",
+  "totalSpentThisWeek": "Total spent this week",
+  "totalSpentThisMonth": "Total spent this month",
+  "week": "Week",
+  "month": "Month",
+  "viewAllTransactions": "View all transactions",
+  "today": "Today",
+  "yesterday": "Yesterday",
+  "entry": "Entry",
+  "entries": "Entries",
+  "noRecentTransactions": "You have no recent transactions!"
+}

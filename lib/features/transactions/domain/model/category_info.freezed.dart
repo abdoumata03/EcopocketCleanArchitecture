@@ -23,6 +23,7 @@ mixin _$CategoryInfo {
   String get icon => throw _privateConstructorUsedError;
   double get total => throw _privateConstructorUsedError;
   double? get budget => throw _privateConstructorUsedError;
+  double? get percentage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CategoryInfoCopyWith<CategoryInfo> get copyWith =>
@@ -42,7 +43,8 @@ abstract class $CategoryInfoCopyWith<$Res> {
       String color,
       String icon,
       double total,
-      double? budget});
+      double? budget,
+      double? percentage});
 }
 
 /// @nodoc
@@ -65,6 +67,7 @@ class _$CategoryInfoCopyWithImpl<$Res, $Val extends CategoryInfo>
     Object? icon = null,
     Object? total = null,
     Object? budget = freezed,
+    Object? percentage = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -95,6 +98,10 @@ class _$CategoryInfoCopyWithImpl<$Res, $Val extends CategoryInfo>
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
               as double?,
+      percentage: freezed == percentage
+          ? _value.percentage
+          : percentage // ignore: cast_nullable_to_non_nullable
+              as double?,
     ) as $Val);
   }
 }
@@ -114,7 +121,8 @@ abstract class _$$_CategoryInfoCopyWith<$Res>
       String color,
       String icon,
       double total,
-      double? budget});
+      double? budget,
+      double? percentage});
 }
 
 /// @nodoc
@@ -135,6 +143,7 @@ class __$$_CategoryInfoCopyWithImpl<$Res>
     Object? icon = null,
     Object? total = null,
     Object? budget = freezed,
+    Object? percentage = freezed,
   }) {
     return _then(_$_CategoryInfo(
       id: null == id
@@ -165,6 +174,10 @@ class __$$_CategoryInfoCopyWithImpl<$Res>
           ? _value.budget
           : budget // ignore: cast_nullable_to_non_nullable
               as double?,
+      percentage: freezed == percentage
+          ? _value.percentage
+          : percentage // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -179,7 +192,8 @@ class _$_CategoryInfo extends _CategoryInfo {
       required this.color,
       required this.icon,
       required this.total,
-      required this.budget})
+      required this.budget,
+      required this.percentage})
       : super._();
 
   @override
@@ -196,10 +210,12 @@ class _$_CategoryInfo extends _CategoryInfo {
   final double total;
   @override
   final double? budget;
+  @override
+  final double? percentage;
 
   @override
   String toString() {
-    return 'CategoryInfo(id: $id, name: $name, count: $count, color: $color, icon: $icon, total: $total, budget: $budget)';
+    return 'CategoryInfo(id: $id, name: $name, count: $count, color: $color, icon: $icon, total: $total, budget: $budget, percentage: $percentage)';
   }
 
   @override
@@ -213,12 +229,14 @@ class _$_CategoryInfo extends _CategoryInfo {
             (identical(other.color, color) || other.color == color) &&
             (identical(other.icon, icon) || other.icon == icon) &&
             (identical(other.total, total) || other.total == total) &&
-            (identical(other.budget, budget) || other.budget == budget));
+            (identical(other.budget, budget) || other.budget == budget) &&
+            (identical(other.percentage, percentage) ||
+                other.percentage == percentage));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, count, color, icon, total, budget);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, count, color, icon, total, budget, percentage);
 
   @JsonKey(ignore: true)
   @override
@@ -235,7 +253,8 @@ abstract class _CategoryInfo extends CategoryInfo {
       required final String color,
       required final String icon,
       required final double total,
-      required final double? budget}) = _$_CategoryInfo;
+      required final double? budget,
+      required final double? percentage}) = _$_CategoryInfo;
   const _CategoryInfo._() : super._();
 
   @override
@@ -252,6 +271,8 @@ abstract class _CategoryInfo extends CategoryInfo {
   double get total;
   @override
   double? get budget;
+  @override
+  double? get percentage;
   @override
   @JsonKey(ignore: true)
   _$$_CategoryInfoCopyWith<_$_CategoryInfo> get copyWith =>

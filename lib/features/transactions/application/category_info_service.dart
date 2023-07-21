@@ -1,3 +1,6 @@
+import 'package:ecopocket_clean_architecture/features/budget/domain/model/category_list.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction_list.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/domain/module.dart';
 import 'package:ecopocket_clean_architecture/utils/date_range_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -51,9 +54,22 @@ Future<CategoryInfoList> getYesterdaysCategoriesInfoList(
   return repo.getYesterdayCategoriesInfo();
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<double> getSpendings(GetSpendingsRef ref,
     {required DateRange range}) async {
   final repo = ref.watch(transactionsRepositoryProvider);
   return repo.getSpendings(range);
+}
+
+@riverpod
+Future<TransactionList> getCategoryTransactions(GetCategoryTransactionsRef ref,
+    {required DateRange range, required int categoryId}) async {
+  final repo = ref.watch(transactionsRepositoryProvider);
+  return repo.getCategoryTransactions(range, categoryId);
+}
+
+@riverpod
+Future<CategoryList> getCategories(GetCategoriesRef ref) async {
+  final repo = ref.watch(transactionsRepositoryProvider);
+  return repo.getCategoryList();
 }

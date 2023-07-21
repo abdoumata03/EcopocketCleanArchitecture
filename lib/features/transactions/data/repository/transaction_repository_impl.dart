@@ -32,7 +32,19 @@ class TransactionsRepositoryImpl implements TransactionsRepository {
   @override
   Future<TransactionList> getTransactionList() async {
     final transactionListEntity = await database.allTransactions();
-    return TransactionListMapper.toModel(transactionListEntity);
+    final transactionList =
+        TransactionListMapper.toModel(transactionListEntity);
+    return transactionList;
+  }
+
+  @override
+  Future<TransactionList> getTransactionListByDateRange(
+      DateRange dateRange) async {
+    final transactionListEntity =
+        await database.getTransactionsByDateRange(dateRange);
+    final transactionList =
+        TransactionListMapper.toModel(transactionListEntity);
+    return transactionList;
   }
 
   @override
@@ -81,7 +93,11 @@ class TransactionsRepositoryImpl implements TransactionsRepository {
   @override
   Future<double> getSpendings(DateRange dateRange) async {
     final amount = await database.getSpendings(dateRange);
-    return amount.first['total'].toDouble();
+    var total = amount.first['total'];
+    if (total == null) {
+      return 0;
+    }
+    return total.toDouble();
   }
 
   @override

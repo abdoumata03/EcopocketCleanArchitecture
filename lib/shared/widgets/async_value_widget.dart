@@ -1,3 +1,4 @@
+import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/shared/widgets/error_message_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,7 +13,10 @@ class AsyncValueWidget<T> extends StatelessWidget {
     return value.when(
       data: data,
       error: (e, st) => Center(child: ErrorMessageWidget(e.toString())),
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => Center(
+          child: CircularProgressIndicator(
+        color: kGray[900],
+      )),
     );
   }
 }

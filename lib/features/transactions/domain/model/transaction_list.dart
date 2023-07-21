@@ -10,6 +10,8 @@ class TransactionList with _$TransactionList {
 
   int get length => transactions.length;
 
+  operator [](int index) => transactions[index];
+
   TransactionList addTransaction(final Transaction newTransaction) =>
       copyWith(transactions: [...transactions, newTransaction]);
 
@@ -26,6 +28,10 @@ class TransactionList with _$TransactionList {
       copyWith(
           transactions:
               transactions.where((t) => t.id != transaction.id).toList());
+
+  TransactionList sortByAmount() => copyWith(
+      transactions: [...transactions]
+        ..sort((a, b) => a.amount.compareTo(b.amount)));
 
   const TransactionList._();
 }

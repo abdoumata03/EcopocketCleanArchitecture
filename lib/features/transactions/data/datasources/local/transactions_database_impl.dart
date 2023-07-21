@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'dart:async';
 import 'dart:developer';
 
@@ -10,21 +12,59 @@ import 'package:ecopocket_clean_architecture/features/transactions/data/entity/c
 import 'package:ecopocket_clean_architecture/features/transactions/data/entity/transactions_entity.dart';
 import 'package:ecopocket_clean_architecture/utils/date_range_model.dart';
 import 'package:ecopocket_clean_architecture/utils/todays_date.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class TransactionsDatabaseImplemention implements TransactionsDatabase {
-  static Database? _database;
+  static Database? db;
 
   Future<Database?> get database async {
-    _database ??= await _initDatabase();
-    return _database;
+    db ??= await _initDatabase();
+    return db;
   }
 
   @override
   Future<TransactionListEntity> allTransactions() async {
     final db = await database;
-    return db!.query(TransactionTable.tableName);
+    final query = await db!.rawQuery('''
+        SELECT 
+          ${TransactionTable.tableName}.*,
+          ${CategoryTable.tableName}.${CategoryTable.columnName} AS category_name
+        FROM 
+        ${TransactionTable.tableName}
+        INNER JOIN 
+        ${CategoryTable.tableName} 
+        ON 
+        ${TransactionTable.tableName}.${TransactionTable.columnCategoryId} = 
+        ${CategoryTable.tableName}.${CategoryTable.columnId}
+''');
+    return query;
+  }
+
+  @override
+  Future<TransactionListEntity> getTransactionsByDateRange(
+      DateRange dateRange) async {
+    final db = await database;
+    final query = await db!.rawQuery('''
+        SELECT 
+          ${TransactionTable.tableName}.*,
+          ${CategoryTable.tableName}.${CategoryTable.columnName} AS category_name
+        FROM 
+        ${TransactionTable.tableName}
+        INNER JOIN 
+        ${CategoryTable.tableName} 
+        ON 
+        ${TransactionTable.tableName}.${TransactionTable.columnCategoryId} = 
+        ${CategoryTable.tableName}.${CategoryTable.columnId}
+        WHERE 
+        ${TransactionTable.tableName}.${TransactionTable.columnTime} >= ? AND
+        ${TransactionTable.tableName}.${TransactionTable.columnTime} <= ?
+''', [
+      dateRange.startDate,
+      dateRange.endDate,
+    ]);
+    return query;
   }
 
   @override

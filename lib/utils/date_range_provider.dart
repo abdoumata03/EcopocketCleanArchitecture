@@ -4,11 +4,18 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'date_range_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 DateRange getDateRange(GetDateRangeRef ref, TimePeriod period) {
   final now = DateTime.now();
+  final today = DateTime(now.year, now.month, now.day);
+  final tomorrow = today.add(const Duration(days: 1));
+  final yesterday = today.subtract(const Duration(days: 1));
 
   switch (period) {
+    case TimePeriod.today:
+      return DateRange(today, tomorrow);
+    case TimePeriod.yesterday:
+      return DateRange(yesterday, today);
     case TimePeriod.thisWeek:
       final startOfWeek = getStartOfWeek(now);
       final endOfWeek = getEndOfWeek(now);
@@ -49,7 +56,8 @@ DateTime getStartOfWeek(DateTime dateTime) {
 DateTime getEndOfWeek(DateTime dateTime) {
   final weekDay = dateTime.weekday;
   final lastDayOfWeek = dateTime.add(Duration(days: 7 - weekDay));
-  return DateTime(lastDayOfWeek.year, lastDayOfWeek.month, lastDayOfWeek.day);
+  return DateTime(
+      lastDayOfWeek.year, lastDayOfWeek.month, lastDayOfWeek.day + 1);
 }
 
 DateTime getStartOfMonth(DateTime dateTime) {
@@ -57,7 +65,7 @@ DateTime getStartOfMonth(DateTime dateTime) {
 }
 
 DateTime getEndOfMonth(DateTime dateTime) {
-  final lastDayOfMonth = DateTime(dateTime.year, dateTime.month + 1, 0);
+  final lastDayOfMonth = DateTime(dateTime.year, dateTime.month + 1, 1);
   return DateTime(
       lastDayOfMonth.year, lastDayOfMonth.month, lastDayOfMonth.day);
 }

@@ -71,7 +71,7 @@ final getYesterdaysCategoriesInfoListProvider =
 
 typedef GetYesterdaysCategoriesInfoListRef
     = AutoDisposeFutureProviderRef<CategoryInfoList>;
-String _$getSpendingsHash() => r'e1e9d91a215ba653ddce5a0b418f8d404fc10318';
+String _$getSpendingsHash() => r'cf837162c0001067ff626f5cf46d80cba58f3304';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -94,7 +94,7 @@ class _SystemHash {
   }
 }
 
-typedef GetSpendingsRef = AutoDisposeFutureProviderRef<double>;
+typedef GetSpendingsRef = FutureProviderRef<double>;
 
 /// See also [getSpendings].
 @ProviderFor(getSpendings)
@@ -139,7 +139,7 @@ class GetSpendingsFamily extends Family<AsyncValue<double>> {
 }
 
 /// See also [getSpendings].
-class GetSpendingsProvider extends AutoDisposeFutureProvider<double> {
+class GetSpendingsProvider extends FutureProvider<double> {
   /// See also [getSpendings].
   GetSpendingsProvider({
     required this.range,
@@ -174,4 +174,115 @@ class GetSpendingsProvider extends AutoDisposeFutureProvider<double> {
     return _SystemHash.finish(hash);
   }
 }
+
+String _$getCategoryTransactionsHash() =>
+    r'593d3d78af77e202898df2205c5dd023b22ad2bd';
+typedef GetCategoryTransactionsRef
+    = AutoDisposeFutureProviderRef<TransactionList>;
+
+/// See also [getCategoryTransactions].
+@ProviderFor(getCategoryTransactions)
+const getCategoryTransactionsProvider = GetCategoryTransactionsFamily();
+
+/// See also [getCategoryTransactions].
+class GetCategoryTransactionsFamily
+    extends Family<AsyncValue<TransactionList>> {
+  /// See also [getCategoryTransactions].
+  const GetCategoryTransactionsFamily();
+
+  /// See also [getCategoryTransactions].
+  GetCategoryTransactionsProvider call({
+    required DateRange range,
+    required int categoryId,
+  }) {
+    return GetCategoryTransactionsProvider(
+      range: range,
+      categoryId: categoryId,
+    );
+  }
+
+  @override
+  GetCategoryTransactionsProvider getProviderOverride(
+    covariant GetCategoryTransactionsProvider provider,
+  ) {
+    return call(
+      range: provider.range,
+      categoryId: provider.categoryId,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'getCategoryTransactionsProvider';
+}
+
+/// See also [getCategoryTransactions].
+class GetCategoryTransactionsProvider
+    extends AutoDisposeFutureProvider<TransactionList> {
+  /// See also [getCategoryTransactions].
+  GetCategoryTransactionsProvider({
+    required this.range,
+    required this.categoryId,
+  }) : super.internal(
+          (ref) => getCategoryTransactions(
+            ref,
+            range: range,
+            categoryId: categoryId,
+          ),
+          from: getCategoryTransactionsProvider,
+          name: r'getCategoryTransactionsProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$getCategoryTransactionsHash,
+          dependencies: GetCategoryTransactionsFamily._dependencies,
+          allTransitiveDependencies:
+              GetCategoryTransactionsFamily._allTransitiveDependencies,
+        );
+
+  final DateRange range;
+  final int categoryId;
+
+  @override
+  bool operator ==(Object other) {
+    return other is GetCategoryTransactionsProvider &&
+        other.range == range &&
+        other.categoryId == categoryId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, range.hashCode);
+    hash = _SystemHash.combine(hash, categoryId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+String _$getCategoriesHash() => r'5a6a876b4a99d2d010a5ff9838f9bec7d3f65fb1';
+
+/// See also [getCategories].
+@ProviderFor(getCategories)
+final getCategoriesProvider = AutoDisposeFutureProvider<CategoryList>.internal(
+  getCategories,
+  name: r'getCategoriesProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getCategoriesHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetCategoriesRef = AutoDisposeFutureProviderRef<CategoryList>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

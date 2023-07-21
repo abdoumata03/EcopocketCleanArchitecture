@@ -1,4 +1,6 @@
 enum TimePeriod {
+  today,
+  yesterday,
   thisWeek,
   previousWeek,
   thisMonth,
