@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:collection/collection.dart';
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/date_filter_controller.dart';
@@ -73,14 +76,14 @@ class _AllTransactionsState extends ConsumerState {
         backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 25.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (selectedDateRange != null)
-                Chip(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (selectedDateRange != null)
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
+                child: Chip(
                   backgroundColor: kBlue.withOpacity(0.1),
                   label: Text(
                     "${dateFormatter.format(selectedDateRange.start)} - ${dateFormatter.format(selectedDateRange.end)}",
@@ -98,32 +101,68 @@ class _AllTransactionsState extends ConsumerState {
                     ref.read(transactionsControllerProvider);
                   },
                 ),
-              if (selectedDateRange != null)
-                SizedBox(
-                  height: 18.h,
-                ),
-              AsyncValueWidget(
-                  value: transactions,
-                  data: (data) {
-                    if (data.length == 0) {
-                      return EmptyTransactions(
-                          message: context.loc.noTransactions);
-                    }
-                    return ListView.separated(
-                        shrinkWrap: true,
-                        reverse: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: data.length,
-                        separatorBuilder: (context, index) => const Divider(),
-                        itemBuilder: (context, index) {
-                          final Transaction transaction = data[index];
-                          return TransactionItem(
-                            transaction: transaction,
-                          );
-                        });
-                  })
-            ],
-          ),
+              ),
+            AsyncValueWidget(
+                value: transactions,
+                data: (data) {
+                  if (data.length == 0) {
+                    return EmptyTransactions(
+                        message: context.loc.noTransactions);
+                  }
+                  final groupedTransactions =
+                      groupBy(data.transactions, (transaction) {
+                    final day = dateFormatter.format(transaction.createdTime);
+                    return day;
+                  });
+                  return ListView.builder(
+                      shrinkWrap: true,
+                      reverse: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: groupedTransactions.length,
+                      itemBuilder: (context, index) {
+                        final date = groupedTransactions.keys.toList()[index];
+                        final transactionsForDay = groupedTransactions[date];
+                        return Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10.h, horizontal: 15.w),
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: kGray[200],
+                              ),
+                              child: Text(
+                                date, // Format date as you like
+                                style: GoogleFonts.jost(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 10.h),
+                              child: ListView.separated(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: transactionsForDay!.length,
+                                separatorBuilder: (context, idx) =>
+                                    const Divider(),
+                                itemBuilder: (context, idx) {
+                                  final transaction = transactionsForDay[idx];
+                                  return Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20.w),
+                                    child: TransactionItem(
+                                        transaction: transaction),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        );
+                      });
+                })
+          ],
         ),
       ),
     );

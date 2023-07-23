@@ -59,8 +59,6 @@ DateRange getDateRange(GetDateRangeRef ref, TimePeriod period) {
   }
 }
 
-// Dart DateTimes have a weekday getter which is 1 for Monday and 7 for Sunday. Using that, write a function that gets the start of the week and the end of the week.
-
 DateTime getStartOfWeek(DateTime dateTime) {
   final weekDay = dateTime.weekday;
   final daysUntilSunday = (weekDay - DateTime.sunday) % 7;

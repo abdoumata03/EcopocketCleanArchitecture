@@ -1,11 +1,11 @@
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction.dart';
 import 'package:ecopocket_clean_architecture/utils/amount_formatter.dart';
-import 'package:ecopocket_clean_architecture/utils/date_utils/date_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class TransactionItem extends ConsumerWidget {
   const TransactionItem({super.key, required this.transaction});
@@ -14,8 +14,8 @@ class TransactionItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dateFormatter = ref.watch(dateFormatterProvider);
     final amountFormatter = ref.watch(amountFormatterProvider);
+    final DateFormat dateFormatter = DateFormat('jm');
 
     return Row(
       children: [
