@@ -1,7 +1,7 @@
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction.dart';
 import 'package:ecopocket_clean_architecture/utils/amount_formatter.dart';
-import 'package:ecopocket_clean_architecture/utils/date_formatter.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

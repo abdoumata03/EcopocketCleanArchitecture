@@ -1,4 +1,11 @@
 enum TimePeriod {
+  sunday,
+  monday,
+  tuesday,
+  wednesday,
+  thursday,
+  friday,
+  saturday,
   today,
   yesterday,
   thisWeek,

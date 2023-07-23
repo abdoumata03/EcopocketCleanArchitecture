@@ -10,8 +10,8 @@ import 'package:ecopocket_clean_architecture/features/transactions/data/datasour
 import 'package:ecopocket_clean_architecture/features/transactions/data/datasources/local/transactions_database.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/data/entity/category_info_entity.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/data/entity/transactions_entity.dart';
-import 'package:ecopocket_clean_architecture/utils/date_range_model.dart';
-import 'package:ecopocket_clean_architecture/utils/todays_date.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_model.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/todays_date.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';

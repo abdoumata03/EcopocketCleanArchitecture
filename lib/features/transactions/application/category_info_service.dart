@@ -1,7 +1,7 @@
 import 'package:ecopocket_clean_architecture/features/budget/domain/model/category_list.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction_list.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/module.dart';
-import 'package:ecopocket_clean_architecture/utils/date_range_model.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/category_info_list.dart';

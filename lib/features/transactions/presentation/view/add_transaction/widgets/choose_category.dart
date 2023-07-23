@@ -5,6 +5,7 @@ import 'package:ecopocket_clean_architecture/features/budget/domain/model/catego
 import 'package:ecopocket_clean_architecture/features/transactions/application/category_info_service.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/category_controller.dart';
 import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
+import 'package:ecopocket_clean_architecture/localization/categories_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -131,11 +132,14 @@ class ChooseCategory extends ConsumerWidget {
                                               )),
                                           SizedBox(height: 10.h),
                                           Text(
-                                            category.name,
+                                            CategoriesLocalizations
+                                                .getCategoryName(
+                                                    context, category.name),
                                             style: GoogleFonts.jost(
                                                 fontSize: 16.sp,
                                                 fontWeight: FontWeight.w500,
                                                 color: kGray[600]),
+                                            textAlign: TextAlign.center,
                                           )
                                         ],
                                       ),

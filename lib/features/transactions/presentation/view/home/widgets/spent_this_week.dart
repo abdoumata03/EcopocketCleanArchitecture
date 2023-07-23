@@ -4,8 +4,8 @@ import 'package:ecopocket_clean_architecture/features/transactions/application/c
 import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:ecopocket_clean_architecture/shared/widgets/async_value_widget.dart';
 import 'package:ecopocket_clean_architecture/utils/amount_formatter.dart';
-import 'package:ecopocket_clean_architecture/utils/date_periods.dart';
-import 'package:ecopocket_clean_architecture/utils/date_range_provider.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_periods.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

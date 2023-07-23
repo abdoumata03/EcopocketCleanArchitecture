@@ -2,7 +2,7 @@ import 'package:ecopocket_clean_architecture/features/budget/domain/model/catego
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/category_info_list.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction_list.dart';
-import 'package:ecopocket_clean_architecture/utils/date_range_model.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_model.dart';
 
 abstract class TransactionsRepository {
   Future<TransactionList> getTransactionList();

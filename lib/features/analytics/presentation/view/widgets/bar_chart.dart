@@ -1,12 +1,14 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
-import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/barchart_controller.dart';
+import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/analytics_controller.dart';
+import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/bar_chart_touched_index_controller.dart';
+import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/bar_chart_controller.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/max_value_controller.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/period_controller.dart';
 import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:ecopocket_clean_architecture/utils/amount_formatter.dart';
-import 'package:ecopocket_clean_architecture/utils/date_periods.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_periods.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +25,6 @@ class CustomBarChart extends ConsumerStatefulWidget {
 }
 
 class _CustomBarChartState extends ConsumerState {
-  int touchedIndex = -1;
   late double? maxValue = 0;
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class _CustomBarChartState extends ConsumerState {
     final barChartGroupData = ref.watch(barChartDataMapControllerProvider);
     final maxVal = ref.watch(maxValueControllerProvider);
     final period = ref.watch(periodControllerProvider);
+    final touchedIndex = ref.watch(barChartTouchedIndexControllerProvider);
 
     return barChartGroupData.when(
         error: (error, stackTrace) {
@@ -75,11 +77,28 @@ class _CustomBarChartState extends ConsumerState {
                       touchCallback: (period == TimePeriod.thisWeek)
                           ? (FlTouchEvent event, barTouchResponse) {
                               if (event is FlTapDownEvent) {
-                                setState(() {
-                                  touchedIndex = barTouchResponse
-                                          ?.spot?.touchedBarGroupIndex ??
-                                      -1;
-                                });
+                                final int? index = barTouchResponse
+                                    ?.spot?.touchedBarGroupIndex;
+                                final barChartTouchedIndexController = ref.read(
+                                    barChartTouchedIndexControllerProvider
+                                        .notifier);
+                                final analyticsController = ref
+                                    .read(analyticsControllerProvider.notifier);
+
+                                if (index == null) {
+                                  barChartTouchedIndexController.setIndex(-1);
+                                  analyticsController.toggle(period);
+                                } else {
+                                  barChartTouchedIndexController
+                                      .setIndex(index);
+                                  ref
+                                      .read(periodControllerProvider.notifier)
+                                      .toggle(period);
+                                  final selectedTimePeriod =
+                                      TimePeriod.values[index];
+                                  analyticsController
+                                      .toggle(selectedTimePeriod);
+                                }
                               }
                             }
                           : null,
@@ -166,9 +185,13 @@ class _CustomBarChartState extends ConsumerState {
       context.loc.saturday
     ];
     bool isHighlighted() {
-      bool isTouched = value.toInt() == touchedIndex;
+      bool isTouched =
+          value.toInt() == ref.read(barChartTouchedIndexControllerProvider);
       if (isTouched) return true;
-      if (!isTouched && touchedIndex == -1) return true;
+      if (!isTouched &&
+          ref.read(barChartTouchedIndexControllerProvider) == -1) {
+        return true;
+      }
       return false;
     }
 
@@ -193,9 +216,13 @@ class _CustomBarChartState extends ConsumerState {
     String textValue = '';
 
     bool isHighlighted() {
-      bool isTouched = value.toInt() == touchedIndex;
+      bool isTouched =
+          value.toInt() == ref.read(barChartTouchedIndexControllerProvider);
       if (isTouched) return true;
-      if (!isTouched && touchedIndex == -1) return true;
+      if (!isTouched &&
+          ref.read(barChartTouchedIndexControllerProvider) == -1) {
+        return true;
+      }
       return false;
     }
 

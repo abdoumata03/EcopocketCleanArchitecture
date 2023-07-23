@@ -1,5 +1,5 @@
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/analytics_controller.dart';
-import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/touched_index_controller.dart';
+import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/pie_chart_touched_index_controller.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/category_info_list.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class CustomPieChart extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final sections = ref.watch(pieChartSectionsProvider(stats));
-    ref.watch(touchedIndexControllerProvider);
+    ref.watch(pieChartTouchedIndexControllerProvider);
 
     return Align(
       alignment: Alignment.center,
@@ -31,14 +31,14 @@ class CustomPieChart extends ConsumerWidget {
                     pieTouchResponse == null ||
                     pieTouchResponse.touchedSection == null) {
                   ref
-                      .read(touchedIndexControllerProvider.notifier)
+                      .read(pieChartTouchedIndexControllerProvider.notifier)
                       .setIndex(-1);
                   return;
                 }
                 final newIndex =
                     pieTouchResponse.touchedSection!.touchedSectionIndex;
                 ref
-                    .read(touchedIndexControllerProvider.notifier)
+                    .read(pieChartTouchedIndexControllerProvider.notifier)
                     .setIndex(newIndex);
               },
             ),

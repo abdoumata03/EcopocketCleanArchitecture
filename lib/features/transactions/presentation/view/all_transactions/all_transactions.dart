@@ -6,7 +6,7 @@ import 'package:ecopocket_clean_architecture/features/transactions/presentation/
 import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:ecopocket_clean_architecture/shared/widgets/async_value_widget.dart';
 import 'package:ecopocket_clean_architecture/shared/widgets/empty_transactions.dart';
-import 'package:ecopocket_clean_architecture/utils/date_formatter.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -3,7 +3,7 @@ import 'package:ecopocket_clean_architecture/features/analytics/data/entity/barc
 import 'package:ecopocket_clean_architecture/features/transactions/data/datasources/local/tables/categories_table.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/data/datasources/local/tables/transactions_table.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/data/entity/category_info_entity.dart';
-import 'package:ecopocket_clean_architecture/utils/date_range_model.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 

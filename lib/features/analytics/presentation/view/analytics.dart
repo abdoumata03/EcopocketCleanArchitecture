@@ -3,6 +3,7 @@
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/constants/styles.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/analytics_controller.dart';
+import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/bar_chart_touched_index_controller.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/period_controller.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/view/widgets/bar_chart.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/view/widgets/category_stat_item.dart';
@@ -14,8 +15,8 @@ import 'package:ecopocket_clean_architecture/localization/app_localizations_cont
 import 'package:ecopocket_clean_architecture/shared/widgets/empty_transactions.dart';
 import 'package:ecopocket_clean_architecture/utils/amount_formatter.dart';
 
-import 'package:ecopocket_clean_architecture/utils/date_periods.dart';
-import 'package:ecopocket_clean_architecture/utils/date_range_provider.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_periods.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -132,6 +133,9 @@ class _AnalyticsState extends ConsumerState {
                   ref
                       .read(analyticsControllerProvider.notifier)
                       .toggle(TimePeriod.thisWeek);
+                  ref
+                      .read(barChartTouchedIndexControllerProvider.notifier)
+                      .setIndex(-1);
                 },
               ),
               SizedBox(width: 10.w),
@@ -148,6 +152,9 @@ class _AnalyticsState extends ConsumerState {
                   ref
                       .read(analyticsControllerProvider.notifier)
                       .toggle(TimePeriod.thisMonth);
+                  ref
+                      .read(barChartTouchedIndexControllerProvider.notifier)
+                      .setIndex(-1);
                 },
               ),
               const Spacer(),
@@ -162,7 +169,7 @@ class _AnalyticsState extends ConsumerState {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.r),
                     border: Border.all(
-                        color: isPieChartVisible ? kGray[600]! : kGray[300]!),
+                        color: isPieChartVisible ? kGray[400]! : kGray[300]!),
                   ),
                   child: SvgPicture.asset(
                     isPieChartVisible

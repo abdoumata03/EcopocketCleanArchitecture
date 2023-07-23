@@ -6,7 +6,7 @@ part of 'analytics_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$pieChartSectionsHash() => r'c9d405b5f6abfb7159c6f6a4761364a611218dc0';
+String _$pieChartSectionsHash() => r'0de71a5713a0bc414a332b7d937944150a06bc26';
 
 /// Copied from Dart SDK
 class _SystemHash {

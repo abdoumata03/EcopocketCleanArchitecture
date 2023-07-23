@@ -1,7 +1,7 @@
 import 'package:ecopocket_clean_architecture/features/budget/data/entity/category_entity.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/data/entity/category_info_entity.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/data/entity/transactions_entity.dart';
-import 'package:ecopocket_clean_architecture/utils/date_range_model.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_model.dart';
 
 abstract class TransactionsDatabase {
   Future<TransactionListEntity> allTransactions();

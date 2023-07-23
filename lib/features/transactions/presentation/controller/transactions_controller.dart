@@ -3,7 +3,7 @@
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction_list.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/module.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/date_filter_controller.dart';
-import 'package:ecopocket_clean_architecture/utils/date_range_model.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'transactions_controller.g.dart';
@@ -37,6 +37,7 @@ class TransactionsController extends _$TransactionsController {
   void applyDateRangeFilter() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() => _fetchTransactionsByDateRange());
+    isSorted = false;
   }
 
   void sortByAmount() async {

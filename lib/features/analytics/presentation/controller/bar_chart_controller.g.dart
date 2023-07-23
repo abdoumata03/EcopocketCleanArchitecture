@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'barchart_controller.dart';
+part of 'bar_chart_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator

@@ -2,11 +2,11 @@ import 'package:ecopocket_clean_architecture/features/analytics/data/entity/barc
 import 'package:ecopocket_clean_architecture/features/analytics/domain/module.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/max_value_controller.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/period_controller.dart';
-import 'package:ecopocket_clean_architecture/utils/date_periods.dart';
-import 'package:ecopocket_clean_architecture/utils/date_range_provider.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_periods.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'barchart_controller.g.dart';
+part 'bar_chart_controller.g.dart';
 
 @riverpod
 class BarChartDataMapController extends _$BarChartDataMapController {

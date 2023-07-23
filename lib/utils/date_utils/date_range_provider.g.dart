@@ -6,7 +6,7 @@ part of 'date_range_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getDateRangeHash() => r'b7c21ae068f86d326c44da4248bdf3948e502933';
+String _$getDateRangeHash() => r'de75c3125f942de754e53034054ff9ed24abb73e';
 
 /// Copied from Dart SDK
 class _SystemHash {

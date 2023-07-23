@@ -3,7 +3,7 @@ import 'package:ecopocket_clean_architecture/features/analytics/data/entity/barc
 import 'package:ecopocket_clean_architecture/features/analytics/domain/repository/analytics_respository.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/data/mapper/category_info_list_mapper.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/category_info_list.dart';
-import 'package:ecopocket_clean_architecture/utils/date_range_model.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_model.dart';
 
 class AnalyticsRepositoryImplementation implements AnalyticsRepository {
   final AnalyticsDatabase _analyticsDatabase;

@@ -1,5 +1,6 @@
-import 'dart:ui';
+// ignore_for_file: constant_identifier_names
 
+import 'dart:ui';
 import 'package:ecopocket_clean_architecture/localization/supported_locale.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

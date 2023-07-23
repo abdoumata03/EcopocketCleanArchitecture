@@ -1,5 +1,5 @@
-import 'package:ecopocket_clean_architecture/utils/date_periods.dart';
-import 'package:ecopocket_clean_architecture/utils/date_range_model.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_periods.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'date_range_provider.g.dart';
@@ -43,19 +43,36 @@ DateRange getDateRange(GetDateRangeRef ref, TimePeriod period) {
       final startOfPrevYear = DateTime(now.year - 1);
       final endOfPrevYear = DateTime(now.year - 1, 12, 31);
       return DateRange(startOfPrevYear, endOfPrevYear);
+    case TimePeriod.sunday:
+    case TimePeriod.monday:
+    case TimePeriod.tuesday:
+    case TimePeriod.wednesday:
+    case TimePeriod.thursday:
+    case TimePeriod.friday:
+    case TimePeriod.saturday:
+      final startOfWeek = getStartOfWeek(now);
+      final endOfWeek = getEndOfWeek(now);
+      final dayOfWeek = period.index;
+      final startOfPeriod = startOfWeek.add(Duration(days: dayOfWeek));
+      final endOfPeriod = endOfWeek.subtract(Duration(days: 7 - dayOfWeek));
+      return DateRange(startOfPeriod, endOfPeriod);
   }
 }
 
+// Dart DateTimes have a weekday getter which is 1 for Monday and 7 for Sunday. Using that, write a function that gets the start of the week and the end of the week.
+
 DateTime getStartOfWeek(DateTime dateTime) {
   final weekDay = dateTime.weekday;
-  final firstDayOfWeek = dateTime.subtract(Duration(days: weekDay));
+  final daysUntilSunday = (weekDay - DateTime.sunday) % 7;
+  final firstDayOfWeek = dateTime.subtract(Duration(days: daysUntilSunday));
   return DateTime(
       firstDayOfWeek.year, firstDayOfWeek.month, firstDayOfWeek.day);
 }
 
 DateTime getEndOfWeek(DateTime dateTime) {
   final weekDay = dateTime.weekday;
-  final lastDayOfWeek = dateTime.add(Duration(days: 7 - weekDay));
+  final daysUntilSaturday = (DateTime.saturday - weekDay + 7) % 7;
+  final lastDayOfWeek = dateTime.add(Duration(days: daysUntilSaturday + 1));
   return DateTime(
       lastDayOfWeek.year, lastDayOfWeek.month, lastDayOfWeek.day + 1);
 }

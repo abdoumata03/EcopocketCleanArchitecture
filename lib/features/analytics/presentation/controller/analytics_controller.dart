@@ -1,8 +1,8 @@
 import 'package:ecopocket_clean_architecture/features/analytics/domain/module.dart';
-import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/touched_index_controller.dart';
+import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/pie_chart_touched_index_controller.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/category_info_list.dart';
-import 'package:ecopocket_clean_architecture/utils/date_periods.dart';
-import 'package:ecopocket_clean_architecture/utils/date_range_provider.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_periods.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +26,6 @@ class AnalyticsController extends _$AnalyticsController {
   }
 
   void toggle(TimePeriod period) async {
-    // state = state.copyWithPrevious(state);
     state = await AsyncValue.guard(() => _getStats(period));
   }
 }
@@ -34,7 +33,7 @@ class AnalyticsController extends _$AnalyticsController {
 @riverpod
 List<PieChartSectionData> pieChartSections(
     PieChartSectionsRef ref, CategoryInfoList stats) {
-  final pieTouchedIndex = ref.watch(touchedIndexControllerProvider);
+  final pieTouchedIndex = ref.watch(pieChartTouchedIndexControllerProvider);
   final sections = List.generate(stats.length, (index) {
     return PieChartSectionData(
       color: Color(int.parse(stats[index].color)),

@@ -9,8 +9,7 @@ part 'locale_provider.g.dart';
 class LocaleController extends _$LocaleController {
   @override
   Locale build() {
-    onAppStart();
-    return const Locale('en');
+    return onAppStart();
   }
 
   void changeLanguage(SupportedLocale locale) {
@@ -22,12 +21,12 @@ class LocaleController extends _$LocaleController {
     }
   }
 
-  void onAppStart() {
+  Locale onAppStart() {
     try {
       final locale = AppSharedPreference.getLocale();
-      state = locale;
+      return locale;
     } catch (error) {
-      state = const Locale('en');
+      return const Locale('en');
     }
   }
 }

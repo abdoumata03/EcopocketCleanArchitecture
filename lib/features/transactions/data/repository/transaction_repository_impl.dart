@@ -8,7 +8,7 @@ import 'package:ecopocket_clean_architecture/features/transactions/domain/model/
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction_list.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/repository/transactions_repository.dart';
-import 'package:ecopocket_clean_architecture/utils/date_range_model.dart';
+import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_model.dart';
 
 class TransactionsRepositoryImpl implements TransactionsRepository {
   final TransactionsDatabase database;
