@@ -44,32 +44,37 @@ Future<double> yesterdaysTotal(YesterdaysTotalRef ref) async {
 Future<CategoryInfoList> getTodaysCategoriesInfoList(
     GetTodaysCategoriesInfoListRef ref) async {
   final repo = ref.watch(transactionsRepositoryProvider);
-  return repo.getTodaysCategoriesInfo();
+  final todaysCategories = await repo.getTodaysCategoriesInfo();
+  return todaysCategories;
 }
 
 @riverpod
 Future<CategoryInfoList> getYesterdaysCategoriesInfoList(
     GetYesterdaysCategoriesInfoListRef ref) async {
   final repo = ref.watch(transactionsRepositoryProvider);
-  return repo.getYesterdayCategoriesInfo();
+  final ystdCategories = await repo.getYesterdayCategoriesInfo();
+  return ystdCategories;
 }
 
 @Riverpod(keepAlive: true)
 Future<double> getSpendings(GetSpendingsRef ref,
     {required DateRange range}) async {
   final repo = ref.watch(transactionsRepositoryProvider);
-  return repo.getSpendings(range);
+  final spendings = await repo.getSpendings(range);
+  return spendings;
 }
 
 @riverpod
 Future<TransactionList> getCategoryTransactions(GetCategoryTransactionsRef ref,
     {required DateRange range, required int categoryId}) async {
   final repo = ref.watch(transactionsRepositoryProvider);
-  return repo.getCategoryTransactions(range, categoryId);
+  final transactions = await repo.getCategoryTransactions(range, categoryId);
+  return transactions;
 }
 
 @riverpod
 Future<CategoryList> getCategories(GetCategoriesRef ref) async {
   final repo = ref.watch(transactionsRepositoryProvider);
-  return repo.getCategoryList();
+  final categories = await repo.getCategoryList();
+  return categories;
 }

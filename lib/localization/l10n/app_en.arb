@@ -40,5 +40,13 @@
   "categoryHealthcare": "Healthcare",
   "categoryPersonal": "Personal",
   "categoryEducation": "Education",
-  "categoryIncome": "Income"
+  "categoryIncome": "Income",
+  "noBudgetSet": "You haven't set any budget yet, you can start by setting your monthly budget.",
+  "setBudget": "Set monthly budget",
+  "monthlyBudget": "Monthly budget",
+  "edit": "Edit",
+  "delete": "Delete",
+  "confirm": "Confirm",
+  "confirmDeleteMonthlyBudgetTitle": "Delete your monthly budget?",
+  "confirmDeleteMonthlyBudgetDescription": "Deleting your monthly budget will also delete your classified budgets."
 }

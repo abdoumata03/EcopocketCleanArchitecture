@@ -5,18 +5,17 @@ import 'package:ecopocket_clean_architecture/constants/styles.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/analytics_controller.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/bar_chart_touched_index_controller.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/period_controller.dart';
+import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/spending_controller.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/view/widgets/bar_chart.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/view/widgets/category_stat_item.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/view/widgets/pie_chart.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/view/widgets/stat_item_list_skeleton.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/view/widgets/toggle_item.dart';
-import 'package:ecopocket_clean_architecture/features/transactions/application/category_info_service.dart';
 import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:ecopocket_clean_architecture/shared/widgets/empty_transactions.dart';
 import 'package:ecopocket_clean_architecture/utils/amount_formatter.dart';
 
 import 'package:ecopocket_clean_architecture/utils/date_utils/date_periods.dart';
-import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_provider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,10 +37,8 @@ class _AnalyticsState extends ConsumerState {
   @override
   Widget build(BuildContext context) {
     final stats = ref.watch(analyticsControllerProvider);
-    final periodController = ref.watch(periodControllerProvider);
-    final range = ref.watch(getDateRangeProvider(periodController));
     final formatter = ref.watch(amountFormatterProvider);
-    final spending = ref.watch(getSpendingsProvider(range: range));
+    final spending = ref.watch(spendingControllerProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -66,7 +63,8 @@ class _AnalyticsState extends ConsumerState {
         padding: EdgeInsets.only(right: 20.w, left: 20.w, bottom: 25.h),
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 30.h),
+            padding: EdgeInsets.only(
+                left: 25.w, right: 25.w, top: 30.h, bottom: 35.h),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8.r),
@@ -78,8 +76,10 @@ class _AnalyticsState extends ConsumerState {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    spending.maybeWhen(
-                      orElse: () {
+                    spending.when(
+                      skipLoadingOnReload: true,
+                      error: (e, st) => const Text("ERROR"),
+                      loading: () {
                         return const Expanded(child: SizedBox());
                       },
                       data: (data) => Text(
@@ -108,7 +108,7 @@ class _AnalyticsState extends ConsumerState {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 0.w),
                   child: SizedBox(
-                    height: 250.h,
+                    height: 260.h,
                     child: CustomBarChart(
                       key: myKey,
                     ),
@@ -134,6 +134,9 @@ class _AnalyticsState extends ConsumerState {
                       .read(analyticsControllerProvider.notifier)
                       .toggle(TimePeriod.thisWeek);
                   ref
+                      .read(spendingControllerProvider.notifier)
+                      .updateSpending();
+                  ref
                       .read(barChartTouchedIndexControllerProvider.notifier)
                       .setIndex(-1);
                 },
@@ -152,6 +155,9 @@ class _AnalyticsState extends ConsumerState {
                   ref
                       .read(analyticsControllerProvider.notifier)
                       .toggle(TimePeriod.thisMonth);
+                  ref
+                      .read(spendingControllerProvider.notifier)
+                      .updateSpending();
                   ref
                       .read(barChartTouchedIndexControllerProvider.notifier)
                       .setIndex(-1);
@@ -215,7 +221,6 @@ class _AnalyticsState extends ConsumerState {
                                   return CategoryStatItem(
                                     index: index,
                                     categoryInfo: statItem,
-                                    period: periodController,
                                   );
                                 })
                           ],

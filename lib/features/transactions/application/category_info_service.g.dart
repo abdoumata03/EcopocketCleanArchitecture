@@ -36,7 +36,7 @@ final yesterdaysTotalProvider = AutoDisposeFutureProvider<double>.internal(
 
 typedef YesterdaysTotalRef = AutoDisposeFutureProviderRef<double>;
 String _$getTodaysCategoriesInfoListHash() =>
-    r'8c05dad3f187d9bffe1bf755601e7d64a9cd5d90';
+    r'0a4b205c161799ef83dda9a73d40025c1e34fb60';
 
 /// See also [getTodaysCategoriesInfoList].
 @ProviderFor(getTodaysCategoriesInfoList)
@@ -54,7 +54,7 @@ final getTodaysCategoriesInfoListProvider =
 typedef GetTodaysCategoriesInfoListRef
     = AutoDisposeFutureProviderRef<CategoryInfoList>;
 String _$getYesterdaysCategoriesInfoListHash() =>
-    r'da720f79e29ed85b0354a78f4ad42d42912a7bd6';
+    r'aaacdd9087f23192d77b91b40cd93a5e77b31000';
 
 /// See also [getYesterdaysCategoriesInfoList].
 @ProviderFor(getYesterdaysCategoriesInfoList)
@@ -71,7 +71,7 @@ final getYesterdaysCategoriesInfoListProvider =
 
 typedef GetYesterdaysCategoriesInfoListRef
     = AutoDisposeFutureProviderRef<CategoryInfoList>;
-String _$getSpendingsHash() => r'cf837162c0001067ff626f5cf46d80cba58f3304';
+String _$getSpendingsHash() => r'30add806ed231f07e2aa9152d4275dcece2adfb5';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -176,7 +176,7 @@ class GetSpendingsProvider extends FutureProvider<double> {
 }
 
 String _$getCategoryTransactionsHash() =>
-    r'593d3d78af77e202898df2205c5dd023b22ad2bd';
+    r'a5f982c0597b2e32d089a0a030f82ce4a65aba2c';
 typedef GetCategoryTransactionsRef
     = AutoDisposeFutureProviderRef<TransactionList>;
 
@@ -270,7 +270,7 @@ class GetCategoryTransactionsProvider
   }
 }
 
-String _$getCategoriesHash() => r'5a6a876b4a99d2d010a5ff9838f9bec7d3f65fb1';
+String _$getCategoriesHash() => r'1747ac979b24ad3aefd3943e092666d8e5991a12';
 
 /// See also [getCategories].
 @ProviderFor(getCategories)

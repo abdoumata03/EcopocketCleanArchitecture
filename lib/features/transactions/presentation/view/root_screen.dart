@@ -2,6 +2,7 @@
 
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/view/analytics.dart';
+import 'package:ecopocket_clean_architecture/features/budget/presentation/view/budget.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/repository/transactions_repository.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/home/home_screen.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/widgets/custom_navigation_bar.dart';
@@ -53,7 +54,7 @@ class RootPage extends ConsumerWidget {
           children: const [
             Center(child: HomePage()),
             Center(child: Analytics()),
-            Center(child: Text('Budget Page')),
+            Center(child: Budget()),
             Center(child: Text('Profile Page'))
           ],
         )),

@@ -25,6 +25,8 @@ dependencies:
     version: ^0.0.0
   shared_preferences: ^2.2.0
   collection: ^1.17.1
+  step_progress_indicator: ^1.0.2
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:

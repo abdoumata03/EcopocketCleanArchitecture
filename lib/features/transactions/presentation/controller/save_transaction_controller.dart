@@ -1,3 +1,6 @@
+import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/analytics_controller.dart';
+import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/bar_chart_controller.dart';
+import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/spending_controller.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/application/category_info_service.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/module.dart';
@@ -30,9 +33,13 @@ class NewTransaction extends _$NewTransaction {
     ref.read(getTodaysCategoriesInfoListProvider);
     ref.invalidate(todaysTotalProvider);
     ref.read(todaysTotalProvider);
-    final period = ref.watch(getDateRangeProvider(TimePeriod.thisWeek));
-    ref.invalidate(getSpendingsProvider(range: period));
-    ref.read(getSpendingsProvider(range: period));
+    const period = TimePeriod.thisMonth;
+    final range = ref.watch(getDateRangeProvider(period));
+    ref.invalidate(getSpendingsProvider(range: range));
+    ref.read(getSpendingsProvider(range: range));
+    ref.read(analyticsControllerProvider.notifier).toggle(period);
+    ref.read(barChartDataMapControllerProvider.notifier).setState();
+    ref.read(spendingControllerProvider.notifier).updateSpending();
 
     return newTransaction;
   }

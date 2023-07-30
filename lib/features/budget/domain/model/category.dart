@@ -9,9 +9,9 @@ class Category with _$Category {
     required String name,
     required String color,
     required String icon,
-    required String budgetType,
-    required double budgetAmount,
-    required double budgetPercentage,
+    required String? budgetType,
+    required double? budgetAmount,
+    required double? budgetPercentage,
   }) = _Category;
 
   const Category._();

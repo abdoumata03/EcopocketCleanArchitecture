@@ -20,9 +20,9 @@ mixin _$Category {
   String get name => throw _privateConstructorUsedError;
   String get color => throw _privateConstructorUsedError;
   String get icon => throw _privateConstructorUsedError;
-  String get budgetType => throw _privateConstructorUsedError;
-  double get budgetAmount => throw _privateConstructorUsedError;
-  double get budgetPercentage => throw _privateConstructorUsedError;
+  String? get budgetType => throw _privateConstructorUsedError;
+  double? get budgetAmount => throw _privateConstructorUsedError;
+  double? get budgetPercentage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CategoryCopyWith<Category> get copyWith =>
@@ -39,9 +39,9 @@ abstract class $CategoryCopyWith<$Res> {
       String name,
       String color,
       String icon,
-      String budgetType,
-      double budgetAmount,
-      double budgetPercentage});
+      String? budgetType,
+      double? budgetAmount,
+      double? budgetPercentage});
 }
 
 /// @nodoc
@@ -61,9 +61,9 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
     Object? name = null,
     Object? color = null,
     Object? icon = null,
-    Object? budgetType = null,
-    Object? budgetAmount = null,
-    Object? budgetPercentage = null,
+    Object? budgetType = freezed,
+    Object? budgetAmount = freezed,
+    Object? budgetPercentage = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -82,18 +82,18 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as String,
-      budgetType: null == budgetType
+      budgetType: freezed == budgetType
           ? _value.budgetType
           : budgetType // ignore: cast_nullable_to_non_nullable
-              as String,
-      budgetAmount: null == budgetAmount
+              as String?,
+      budgetAmount: freezed == budgetAmount
           ? _value.budgetAmount
           : budgetAmount // ignore: cast_nullable_to_non_nullable
-              as double,
-      budgetPercentage: null == budgetPercentage
+              as double?,
+      budgetPercentage: freezed == budgetPercentage
           ? _value.budgetPercentage
           : budgetPercentage // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
     ) as $Val);
   }
 }
@@ -110,9 +110,9 @@ abstract class _$$_CategoryCopyWith<$Res> implements $CategoryCopyWith<$Res> {
       String name,
       String color,
       String icon,
-      String budgetType,
-      double budgetAmount,
-      double budgetPercentage});
+      String? budgetType,
+      double? budgetAmount,
+      double? budgetPercentage});
 }
 
 /// @nodoc
@@ -130,9 +130,9 @@ class __$$_CategoryCopyWithImpl<$Res>
     Object? name = null,
     Object? color = null,
     Object? icon = null,
-    Object? budgetType = null,
-    Object? budgetAmount = null,
-    Object? budgetPercentage = null,
+    Object? budgetType = freezed,
+    Object? budgetAmount = freezed,
+    Object? budgetPercentage = freezed,
   }) {
     return _then(_$_Category(
       id: null == id
@@ -151,18 +151,18 @@ class __$$_CategoryCopyWithImpl<$Res>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as String,
-      budgetType: null == budgetType
+      budgetType: freezed == budgetType
           ? _value.budgetType
           : budgetType // ignore: cast_nullable_to_non_nullable
-              as String,
-      budgetAmount: null == budgetAmount
+              as String?,
+      budgetAmount: freezed == budgetAmount
           ? _value.budgetAmount
           : budgetAmount // ignore: cast_nullable_to_non_nullable
-              as double,
-      budgetPercentage: null == budgetPercentage
+              as double?,
+      budgetPercentage: freezed == budgetPercentage
           ? _value.budgetPercentage
           : budgetPercentage // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
     ));
   }
 }
@@ -189,11 +189,11 @@ class _$_Category extends _Category {
   @override
   final String icon;
   @override
-  final String budgetType;
+  final String? budgetType;
   @override
-  final double budgetAmount;
+  final double? budgetAmount;
   @override
-  final double budgetPercentage;
+  final double? budgetPercentage;
 
   @override
   String toString() {
@@ -234,9 +234,9 @@ abstract class _Category extends Category {
       required final String name,
       required final String color,
       required final String icon,
-      required final String budgetType,
-      required final double budgetAmount,
-      required final double budgetPercentage}) = _$_Category;
+      required final String? budgetType,
+      required final double? budgetAmount,
+      required final double? budgetPercentage}) = _$_Category;
   const _Category._() : super._();
 
   @override
@@ -248,11 +248,11 @@ abstract class _Category extends Category {
   @override
   String get icon;
   @override
-  String get budgetType;
+  String? get budgetType;
   @override
-  double get budgetAmount;
+  double? get budgetAmount;
   @override
-  double get budgetPercentage;
+  double? get budgetPercentage;
   @override
   @JsonKey(ignore: true)
   _$$_CategoryCopyWith<_$_Category> get copyWith =>

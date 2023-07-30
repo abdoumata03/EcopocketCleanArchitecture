@@ -4,7 +4,6 @@ import 'package:ecopocket_clean_architecture/features/transactions/domain/model/
 import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:ecopocket_clean_architecture/localization/categories_localizations.dart';
 import 'package:ecopocket_clean_architecture/utils/amount_formatter.dart';
-import 'package:ecopocket_clean_architecture/utils/date_utils/date_periods.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,12 +13,10 @@ class CategoryStatItem extends ConsumerWidget {
   const CategoryStatItem({
     super.key,
     required this.categoryInfo,
-    required this.period,
     required this.index,
   });
 
   final CategoryInfo categoryInfo;
-  final TimePeriod period;
   final int index;
 
   @override

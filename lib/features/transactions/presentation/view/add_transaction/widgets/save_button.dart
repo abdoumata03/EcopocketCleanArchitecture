@@ -18,6 +18,7 @@ class SaveTransactionButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final amount = ref.watch(amountProvider);
     final category = ref.watch(chosenCategoryProvider);
+
     return GestureDetector(
       onTap: (amount != '0' && category != null)
           ? () {

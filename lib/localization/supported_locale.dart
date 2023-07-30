@@ -21,6 +21,7 @@ extension SupportedLocalExtension on SupportedLocale {
 extension LocaleExtension on Locale {
   String get name {
     late String name;
+
     switch (this) {
       case const Locale('en'):
         name = 'English';

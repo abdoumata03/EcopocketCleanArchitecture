@@ -40,5 +40,13 @@
   "categoryHealthcare": "Santé",
   "categoryPersonal": "Personnel",
   "categoryEducation": "Éducation",
-  "categoryIncome": "Revenu"
+  "categoryIncome": "Revenu",
+  "noBudgetSet": "Vous n'avez pas encore défini de budget, vous pouvez commencer en définissant votre budget mensuel.",
+  "setBudget": "Définir le budget mensuel",
+  "monthlyBudget": "Budget mensuel",
+  "edit": "Modifier",
+  "delete": "Supprimer",
+  "confirm": "Confirmer",
+  "confirmDeleteMonthlyBudgetTitle": "Supprimer votre budget mensuel ?",
+  "confirmDeleteMonthlyBudgetDescription": "La suppression de votre budget mensuel entraînera également la suppression de vos budgets classés."
 }

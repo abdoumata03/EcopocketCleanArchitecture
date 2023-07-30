@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:collection/collection.dart';
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
-import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/date_filter_controller.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/transactions_controller.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/all_transactions/widgets/transaction_item_widget.dart';
@@ -106,8 +103,13 @@ class _AllTransactionsState extends ConsumerState {
                 value: transactions,
                 data: (data) {
                   if (data.length == 0) {
-                    return EmptyTransactions(
-                        message: context.loc.noTransactions);
+                    return Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(
+                          vertical: 20.h, horizontal: 20.w),
+                      child: EmptyTransactions(
+                          message: context.loc.noTransactions),
+                    );
                   }
                   final groupedTransactions =
                       groupBy(data.transactions, (transaction) {
