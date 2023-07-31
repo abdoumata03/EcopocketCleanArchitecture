@@ -1,6 +1,6 @@
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/constants/styles.dart';
-import 'package:ecopocket_clean_architecture/features/transactions/application/category_info_service.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/providers/home_providers.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/category_info.dart';
 import 'package:ecopocket_clean_architecture/localization/categories_localizations.dart';
 import 'package:ecopocket_clean_architecture/shared/widgets/async_value_widget.dart';

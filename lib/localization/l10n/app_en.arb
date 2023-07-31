@@ -48,5 +48,8 @@
   "delete": "Delete",
   "confirm": "Confirm",
   "confirmDeleteMonthlyBudgetTitle": "Delete your monthly budget?",
-  "confirmDeleteMonthlyBudgetDescription": "Deleting your monthly budget will also delete your classified budgets."
+  "confirmDeleteMonthlyBudgetDescription": "Deleting your monthly budget will also delete your classified budgets.",
+  "byPercentage": "By percentage",
+  "byPercentageDescription": "Of your monthly budget",
+  "confirmDeleteCategoryBudgetTitle": "Delete your category budget?"
 }

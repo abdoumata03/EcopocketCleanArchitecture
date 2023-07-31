@@ -1,31 +1,18 @@
 import 'package:ecopocket_clean_architecture/features/analytics/data/datasources/local/analytics_database.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/data/entity/barchartdata_entity.dart';
-import 'package:ecopocket_clean_architecture/features/transactions/data/datasources/local/tables/categories_table.dart';
-import 'package:ecopocket_clean_architecture/features/transactions/data/datasources/local/tables/transactions_table.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/data/entity/category_info_entity.dart';
 import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_model.dart';
-import 'package:path/path.dart';
+import 'package:ecopocket_clean_architecture/utils/db_helper/tables/categories_table.dart';
+import 'package:ecopocket_clean_architecture/utils/db_helper/tables/transactions_table.dart';
 import 'package:sqflite/sqflite.dart';
 
 class AnalyticsDatabaseImplementation implements AnalyticsDatabase {
-  static Database? db;
-
-  Future<Database?> get database async {
-    db ??= await _initDatabase();
-    return db;
-  }
-
-  Future<Database> _initDatabase() async {
-    final dbPath = await getDatabasesPath();
-    final path = join(dbPath, 'ecopocket.db');
-
-    return await openDatabase(path);
-  }
+  final Database database;
+  AnalyticsDatabaseImplementation(this.database);
 
   @override
   Future<CategoryInfoListEntity> getCategoryStats(DateRange dateRange) async {
-    final db = await database;
-    final query = db!.rawQuery('''
+    final query = database.rawQuery('''
         SELECT 
           ${CategoryTable.tableName}.${CategoryTable.columnId},
           ${CategoryTable.columnName} AS name,
@@ -62,8 +49,7 @@ class AnalyticsDatabaseImplementation implements AnalyticsDatabase {
   @override
   Future<BarChartDataMapList> getWeeklyBarChartDataMap(
       DateRange dateRange) async {
-    final db = await database;
-    final query = db!.rawQuery('''
+    final query = database.rawQuery('''
        SELECT strftime('%w', ${TransactionTable.columnTime}) AS day, 
        SUM(amount) AS total_spent
        FROM ${TransactionTable.tableName}
@@ -77,8 +63,7 @@ class AnalyticsDatabaseImplementation implements AnalyticsDatabase {
   @override
   Future<BarChartDataMapList> getMonthlyBarChartDataMap(
       DateRange dateRange) async {
-    final db = await database;
-    final query = db!.rawQuery('''
+    final query = database.rawQuery('''
        SELECT strftime('%d', ${TransactionTable.columnTime}) AS day, 
        SUM(amount) AS total_spent
        FROM ${TransactionTable.tableName}

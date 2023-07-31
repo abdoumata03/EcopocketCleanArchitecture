@@ -7,7 +7,7 @@ part of 'module.dart';
 // **************************************************************************
 
 String _$transactionsDatabaseHash() =>
-    r'cc354f6959b78e3186e52f4cc2f1c91b63899fc6';
+    r'0b1e0e84a3072c7c23aa833ef5e2402664b2c989';
 
 /// See also [transactionsDatabase].
 @ProviderFor(transactionsDatabase)

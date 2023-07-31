@@ -2,7 +2,7 @@
 
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/features/budget/domain/model/category_list.dart';
-import 'package:ecopocket_clean_architecture/features/transactions/application/category_info_service.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/providers/home_providers.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/category_controller.dart';
 import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:ecopocket_clean_architecture/localization/categories_localizations.dart';
@@ -20,7 +20,7 @@ class ChooseCategory extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categories = ref.watch(getCategoriesProvider);
+    final categories = ref.watch(getCategoriesProvider());
     final category = ref.watch(chosenCategoryProvider);
     return InkWell(
       onTap: () => showCategoriesBottomSheet(context, categories, ref),
@@ -103,6 +103,7 @@ class ChooseCategory extends ConsumerWidget {
                     data: (data) {
                       return GridView.count(
                           shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
                           crossAxisCount: 3,
                           children: [
                             for (var category in data.categories)

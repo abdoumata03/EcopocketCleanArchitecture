@@ -1,24 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'module.dart';
+part of 'update_category_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$analyticsDatabaseHash() => r'6ba860d284a7f8bfe69c8a93f272ccffc5c06227';
+String _$updateCategoryHash() => r'fb7ebced77a34bc10d4fef9c41bcf8e01c0bee7e';
 
-/// See also [analyticsDatabase].
-@ProviderFor(analyticsDatabase)
-final analyticsDatabaseProvider = Provider<AnalyticsDatabase>.internal(
-  analyticsDatabase,
-  name: r'analyticsDatabaseProvider',
+/// See also [UpdateCategory].
+@ProviderFor(UpdateCategory)
+final updateCategoryProvider =
+    AutoDisposeNotifierProvider<UpdateCategory, void>.internal(
+  UpdateCategory.new,
+  name: r'updateCategoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$analyticsDatabaseHash,
+      : _$updateCategoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef AnalyticsDatabaseRef = ProviderRef<AnalyticsDatabase>;
+typedef _$UpdateCategory = AutoDisposeNotifier<void>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

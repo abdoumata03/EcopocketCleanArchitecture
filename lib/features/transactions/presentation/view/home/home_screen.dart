@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
-import 'package:ecopocket_clean_architecture/features/transactions/application/category_info_service.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/providers/home_providers.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/category_info_list.dart';
 import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:ecopocket_clean_architecture/shared/widgets/empty_transactions.dart';

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ecopocket_clean_architecture/features/budget/domain/model/category_list.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction_list.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/module.dart';
@@ -5,14 +7,8 @@ import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_model.d
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/category_info_list.dart';
-import 'package:ecopocket_clean_architecture/features/transactions/domain/repository/transactions_repository.dart';
 
-part 'category_info_service.g.dart';
-
-class CategoryInfoService {
-  CategoryInfoService({required this.transactionsRepository});
-  final TransactionsRepository transactionsRepository;
-}
+part 'home_providers.g.dart';
 
 @riverpod
 Future<double> todaysTotal(TodaysTotalRef ref) async {
@@ -73,8 +69,19 @@ Future<TransactionList> getCategoryTransactions(GetCategoryTransactionsRef ref,
 }
 
 @riverpod
-Future<CategoryList> getCategories(GetCategoriesRef ref) async {
+Future<CategoryList> getCategories(GetCategoriesRef ref,
+    [CategoryType? categoryType]) async {
   final repo = ref.watch(transactionsRepositoryProvider);
   final categories = await repo.getCategoryList();
-  return categories;
+  switch (categoryType) {
+    case CategoryType.budget:
+      return categories.haveBudgetCategories;
+    case CategoryType.noBudget:
+      log('HERE');
+      return categories.noBudgetCategories;
+    default:
+      return categories;
+  }
 }
+
+enum CategoryType { budget, noBudget }

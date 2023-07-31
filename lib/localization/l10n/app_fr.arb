@@ -48,5 +48,9 @@
   "delete": "Supprimer",
   "confirm": "Confirmer",
   "confirmDeleteMonthlyBudgetTitle": "Supprimer votre budget mensuel ?",
-  "confirmDeleteMonthlyBudgetDescription": "La suppression de votre budget mensuel entraînera également la suppression de vos budgets classés."
+  "confirmDeleteMonthlyBudgetDescription": "La suppression de votre budget mensuel entraînera également la suppression de vos budgets classés.",
+  "byPercentage": "Par pourcentage",
+  "byPercentageDescription": "De votre budget mensuel",
+  "confirmDeleteCategoryBudgetTitle": "Supprimer votre budget de catégorie?"
+
 }

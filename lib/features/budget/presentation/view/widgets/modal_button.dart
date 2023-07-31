@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MonthlyBudgetModalButton extends StatelessWidget {
-  const MonthlyBudgetModalButton(
+class ModalBottomSheetButton extends StatelessWidget {
+  const ModalBottomSheetButton(
       {super.key,
       required this.text,
       required this.icon,

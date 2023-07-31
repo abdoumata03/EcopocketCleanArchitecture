@@ -5,7 +5,7 @@ import 'package:ecopocket_clean_architecture/constants/styles.dart';
 import 'package:ecopocket_clean_architecture/features/budget/presentation/view/widgets/confirm_delete_dialog.dart';
 import 'package:ecopocket_clean_architecture/features/budget/presentation/view/widgets/modal_button.dart';
 import 'package:ecopocket_clean_architecture/features/budget/presentation/view/widgets/monthly_budget_dialog.dart';
-import 'package:ecopocket_clean_architecture/features/transactions/application/category_info_service.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/providers/home_providers.dart';
 import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:ecopocket_clean_architecture/shared/widgets/async_value_widget.dart';
 import 'package:ecopocket_clean_architecture/utils/date_utils/date_periods.dart';
@@ -143,7 +143,7 @@ class MonthlyBudgetWidget extends ConsumerWidget {
                     ),
                   ),
                 ),
-                MonthlyBudgetModalButton(
+                ModalBottomSheetButton(
                     icon: 'assets/icons/edit.svg',
                     text: context.loc.edit,
                     color: kGray[800]!,
@@ -158,7 +158,7 @@ class MonthlyBudgetWidget extends ConsumerWidget {
                 const Divider(
                   height: 0,
                 ),
-                MonthlyBudgetModalButton(
+                ModalBottomSheetButton(
                   text: context.loc.delete,
                   icon: 'assets/icons/delete.svg',
                   onTap: () {

@@ -10,16 +10,20 @@ class CategoryList with _$CategoryList {
 
   int get length => categories.length;
 
-  List<Category> get haveBudgetCategories {
-    return categories
-        .where((category) => category.budgetAmount != null)
-        .toList();
+  operator [](int index) => categories[index];
+
+  CategoryList get haveBudgetCategories {
+    return copyWith(
+        categories: categories
+            .where((category) => category.budgetAmount != null)
+            .toList());
   }
 
-  List<Category> get noBudgetCategories {
-    return categories
-        .where((category) => category.budgetAmount == null)
-        .toList();
+  CategoryList get noBudgetCategories {
+    return copyWith(
+        categories: categories
+            .where((category) => category.budgetAmount == null)
+            .toList());
   }
 
   const CategoryList._();

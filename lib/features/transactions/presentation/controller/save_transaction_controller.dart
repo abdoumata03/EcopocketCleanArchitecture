@@ -1,7 +1,8 @@
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/analytics_controller.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/bar_chart_controller.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/controller/spending_controller.dart';
-import 'package:ecopocket_clean_architecture/features/transactions/application/category_info_service.dart';
+import 'package:ecopocket_clean_architecture/features/budget/domain/module.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/providers/home_providers.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/module.dart';
 import 'package:ecopocket_clean_architecture/utils/date_utils/date_periods.dart';
@@ -40,6 +41,9 @@ class NewTransaction extends _$NewTransaction {
     ref.read(analyticsControllerProvider.notifier).toggle(period);
     ref.read(barChartDataMapControllerProvider.notifier).setState();
     ref.read(spendingControllerProvider.notifier).updateSpending();
+    ref.invalidate(
+        categorySpendingProvider(dateRange: range, categoryId: category));
+    ref.read(categorySpendingProvider(dateRange: range, categoryId: category));
 
     return newTransaction;
   }

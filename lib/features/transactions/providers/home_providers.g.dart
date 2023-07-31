@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'category_info_service.dart';
+part of 'home_providers.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -270,19 +270,85 @@ class GetCategoryTransactionsProvider
   }
 }
 
-String _$getCategoriesHash() => r'1747ac979b24ad3aefd3943e092666d8e5991a12';
+String _$getCategoriesHash() => r'c81f25d04584d97e18da517aefe522cb9be2536a';
+typedef GetCategoriesRef = AutoDisposeFutureProviderRef<CategoryList>;
 
 /// See also [getCategories].
 @ProviderFor(getCategories)
-final getCategoriesProvider = AutoDisposeFutureProvider<CategoryList>.internal(
-  getCategories,
-  name: r'getCategoriesProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$getCategoriesHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const getCategoriesProvider = GetCategoriesFamily();
 
-typedef GetCategoriesRef = AutoDisposeFutureProviderRef<CategoryList>;
+/// See also [getCategories].
+class GetCategoriesFamily extends Family<AsyncValue<CategoryList>> {
+  /// See also [getCategories].
+  const GetCategoriesFamily();
+
+  /// See also [getCategories].
+  GetCategoriesProvider call([
+    CategoryType? categoryType,
+  ]) {
+    return GetCategoriesProvider(
+      categoryType,
+    );
+  }
+
+  @override
+  GetCategoriesProvider getProviderOverride(
+    covariant GetCategoriesProvider provider,
+  ) {
+    return call(
+      provider.categoryType,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'getCategoriesProvider';
+}
+
+/// See also [getCategories].
+class GetCategoriesProvider extends AutoDisposeFutureProvider<CategoryList> {
+  /// See also [getCategories].
+  GetCategoriesProvider([
+    this.categoryType,
+  ]) : super.internal(
+          (ref) => getCategories(
+            ref,
+            categoryType,
+          ),
+          from: getCategoriesProvider,
+          name: r'getCategoriesProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$getCategoriesHash,
+          dependencies: GetCategoriesFamily._dependencies,
+          allTransitiveDependencies:
+              GetCategoriesFamily._allTransitiveDependencies,
+        );
+
+  final CategoryType? categoryType;
+
+  @override
+  bool operator ==(Object other) {
+    return other is GetCategoriesProvider && other.categoryType == categoryType;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, categoryType.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

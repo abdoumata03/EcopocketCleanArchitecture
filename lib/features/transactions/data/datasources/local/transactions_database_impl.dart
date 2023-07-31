@@ -4,30 +4,24 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:ecopocket_clean_architecture/features/budget/data/entity/category_entity.dart';
-import 'package:ecopocket_clean_architecture/features/transactions/data/datasources/local/tables/categories_table.dart';
-import 'package:ecopocket_clean_architecture/features/transactions/data/datasources/local/tables/settings_table.dart';
-import 'package:ecopocket_clean_architecture/features/transactions/data/datasources/local/tables/transactions_table.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/data/datasources/local/transactions_database.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/data/entity/category_info_entity.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/data/entity/transactions_entity.dart';
 import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_model.dart';
 import 'package:ecopocket_clean_architecture/utils/date_utils/todays_date.dart';
+import 'package:ecopocket_clean_architecture/utils/db_helper/tables/categories_table.dart';
+import 'package:ecopocket_clean_architecture/utils/db_helper/tables/transactions_table.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class TransactionsDatabaseImplemention implements TransactionsDatabase {
-  static Database? db;
-
-  Future<Database?> get database async {
-    db ??= await _initDatabase();
-    return db;
-  }
+  final Database database;
+  TransactionsDatabaseImplemention(this.database);
 
   @override
   Future<TransactionListEntity> allTransactions() async {
-    final db = await database;
-    final query = await db!.rawQuery('''
+    final query = await database.rawQuery('''
         SELECT 
           ${TransactionTable.tableName}.*,
           ${CategoryTable.tableName}.${CategoryTable.columnName} AS category_name
@@ -45,8 +39,7 @@ class TransactionsDatabaseImplemention implements TransactionsDatabase {
   @override
   Future<TransactionListEntity> getTransactionsByDateRange(
       DateRange dateRange) async {
-    final db = await database;
-    final query = await db!.rawQuery('''
+    final query = await database.rawQuery('''
         SELECT 
           ${TransactionTable.tableName}.*,
           ${CategoryTable.tableName}.${CategoryTable.columnName} AS category_name
@@ -69,16 +62,14 @@ class TransactionsDatabaseImplemention implements TransactionsDatabase {
 
   @override
   Future<CategoryListEntity> allCategories() async {
-    final db = await database;
-    return db!.query(CategoryTable.tableName);
+    return database.query(CategoryTable.tableName);
   }
 
   @override
   Future<TransactionEntity> addTransaction(
       TransactionEntity transactionEntity) async {
-    final db = await database;
     late final TransactionEntity transaction;
-    await db!.transaction((txn) async {
+    await database.transaction((txn) async {
       final id = await txn.insert(TransactionTable.tableName, transactionEntity,
           conflictAlgorithm: ConflictAlgorithm.replace);
       final results = await txn.query(TransactionTable.tableName,
@@ -90,24 +81,20 @@ class TransactionsDatabaseImplemention implements TransactionsDatabase {
 
   @override
   Future<void> updateTransaction(TransactionEntity transactionEntity) async {
-    final db = await database;
     final int id = transactionEntity['id'];
-    await db!.update(TransactionTable.tableName, transactionEntity,
+    await database.update(TransactionTable.tableName, transactionEntity,
         where: '${TransactionTable.columnId} = ?', whereArgs: [id]);
   }
 
   @override
   Future<void> deleteTransaction(int id) async {
-    final db = await database;
-    await db!.delete(TransactionTable.tableName,
+    await database.delete(TransactionTable.tableName,
         where: '${TransactionTable.tableName} = ?', whereArgs: [id]);
   }
 
   @override
   Future<CategoryInfoListEntity> getTodayCategoryInfo() async {
-    final db = await database;
-
-    var query = await db!.rawQuery('''
+    var query = await database.rawQuery('''
         SELECT 
           ${CategoryTable.tableName}.${CategoryTable.columnId},
           ${CategoryTable.columnName} AS name,
@@ -134,9 +121,7 @@ class TransactionsDatabaseImplemention implements TransactionsDatabase {
 
   @override
   Future<CategoryInfoListEntity> getYstdCategoryInfo() async {
-    final db = await database;
-
-    var query = await db!.rawQuery('''
+    var query = await database.rawQuery('''
         SELECT 
           ${CategoryTable.tableName}.${CategoryTable.columnId},
           ${CategoryTable.columnName} AS name,
@@ -167,8 +152,7 @@ class TransactionsDatabaseImplemention implements TransactionsDatabase {
 
   @override
   Future<dynamic> getSpendings(DateRange dateRange) async {
-    final db = await database;
-    final query = db!.query(TransactionTable.tableName,
+    final query = database.query(TransactionTable.tableName,
         columns: ['SUM(${TransactionTable.columnAmount}) AS total'],
         where:
             '${TransactionTable.columnTime} >= ? AND ${TransactionTable.columnTime} <= ?',
@@ -180,33 +164,12 @@ class TransactionsDatabaseImplemention implements TransactionsDatabase {
   @override
   Future<TransactionListEntity> getCategoryTransactions(
       DateRange dateRange, int categoryId) async {
-    final db = await database;
-
-    final query = db!.query(TransactionTable.tableName,
+    final query = database.query(TransactionTable.tableName,
         columns: ['*'],
         where:
             '${TransactionTable.columnTime} >= ? AND ${TransactionTable.columnTime} <= ? AND ${TransactionTable.columnCategoryId} = ?',
         whereArgs: [dateRange.startDate, dateRange.endDate, categoryId]);
 
     return query;
-  }
-
-  Future<Database> _initDatabase() async {
-    final dbPath = await getDatabasesPath();
-    final path = join(dbPath, 'ecopocket.db');
-
-    return await openDatabase(path,
-        version: 1, onCreate: _createDB, onConfigure: _onConfigure);
-  }
-
-  FutureOr<void> _createDB(Database db, int version) async {
-    await db.execute(TransactionTable.createTableQuery);
-    await db.execute(CategoryTable.createTableQuery);
-    CategoryTable.populateCategoriesTable(db);
-    await db.execute(SettingsTable.createTableQuery);
-  }
-
-  Future<void> _onConfigure(Database db) async {
-    await db.execute('PRAGMA foreign_keys = ON');
   }
 }

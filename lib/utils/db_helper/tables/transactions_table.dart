@@ -1,4 +1,4 @@
-import 'package:ecopocket_clean_architecture/features/transactions/data/datasources/local/tables/categories_table.dart';
+import 'package:ecopocket_clean_architecture/utils/db_helper/tables/categories_table.dart';
 
 class TransactionTable {
   static const String tableName = 'transactions';
