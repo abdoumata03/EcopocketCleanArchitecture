@@ -76,7 +76,13 @@ class CategoryBudgetWidget extends ConsumerWidget {
                             fontWeight: FontWeight.w400,
                             fontSize: 14.sp,
                           ),
-                        )
+                        ),
+                        const Spacer(),
+                        if (percentage == 100)
+                          SvgPicture.asset(
+                            'assets/icons/warning.svg',
+                            color: kRed,
+                          ),
                       ],
                     ),
                     SizedBox(

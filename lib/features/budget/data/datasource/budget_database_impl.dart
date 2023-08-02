@@ -17,8 +17,8 @@ class BudgetDatabaseImplementation implements BudgetDatabase {
   }
 
   @override
-  Future categorySpending(int categoryId, DateRange dateRange) {
-    final query = database.query(TransactionTable.tableName,
+  Future categorySpending(int categoryId, DateRange dateRange) async {
+    final query = await database.query(TransactionTable.tableName,
         columns: ['SUM(${TransactionTable.columnAmount}) AS total'],
         where:
             '${TransactionTable.columnTime} >= ? AND ${TransactionTable.columnTime} <= ? AND ${TransactionTable.columnCategoryId} = ?',
@@ -26,4 +26,12 @@ class BudgetDatabaseImplementation implements BudgetDatabase {
 
     return query;
   }
+
+  // @override
+  // Future<CategoryEntity> getCategory(int categoryId) async {
+  //   final query = await database.query(CategoryTable.tableName,
+  //       where: '${CategoryTable.columnId} = ?', whereArgs: [categoryId]);
+
+  //   return query;
+  // }
 }

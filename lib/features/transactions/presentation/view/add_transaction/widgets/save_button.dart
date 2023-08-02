@@ -1,8 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
+import 'package:ecopocket_clean_architecture/exceptions/amount_exceeded.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/amount_controller.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/category_controller.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/note_controller.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/save_transaction_controller.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/add_transaction/widgets/confirm_budget_exceeded_dialog.dart';
 import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,19 +24,42 @@ class SaveTransactionButton extends ConsumerWidget {
     final category = ref.watch(chosenCategoryProvider);
 
     return GestureDetector(
-      onTap: (amount != '0' && category != null)
-          ? () {
-              ref.read(newTransactionProvider.notifier).saveTranscation(
-                  amount: double.parse(ref.watch(amountProvider)),
-                  type: type,
-                  category: ref.watch(chosenCategoryProvider)!.id,
-                  wallet: null,
-                  description: ref.watch(noteProvider),
-                  createdTime: DateTime.now());
-
-              context.pop();
+      onTap: () async {
+        if (amount != '0' && category != null) {
+          try {
+            await ref.read(newTransactionProvider.notifier).verifyBudget();
+            ref.read(newTransactionProvider.notifier).saveTranscation(
+                amount: double.parse(ref.watch(amountProvider)),
+                type: type,
+                category: ref.watch(chosenCategoryProvider)!.id,
+                wallet: null,
+                description: ref.watch(noteProvider),
+                createdTime: DateTime.now());
+            context.pop();
+          } catch (e) {
+            if (e is MonthlyBudgetExpection) {
+              // show confimation dialog
+              await showDialog(
+                  context: context,
+                  builder: (context) => ConfirmBudgetExceededDialog(
+                        title: context.loc.confirmMonthlyBudgetExceededTitle,
+                        description:
+                            context.loc.confirmMonthlyBudgetExceededDescription,
+                      ));
+            } else if (e is CategoryBudgetException) {
+              await showDialog(
+                  context: context,
+                  builder: (context) => ConfirmBudgetExceededDialog(
+                        title: context.loc.confirmCategoryBudgetExceededTitle,
+                        description: context
+                            .loc.confirmCategoryBudgetExceededDescription,
+                      ));
             }
-          : null,
+          }
+        } else {
+          return;
+        }
+      },
       child: Container(
         height: 65.h,
         width: double.infinity,

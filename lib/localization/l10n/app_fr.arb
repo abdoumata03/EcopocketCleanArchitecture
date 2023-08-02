@@ -51,6 +51,12 @@
   "confirmDeleteMonthlyBudgetDescription": "La suppression de votre budget mensuel entraînera également la suppression de vos budgets classés.",
   "byPercentage": "Par pourcentage",
   "byPercentageDescription": "De votre budget mensuel",
-  "confirmDeleteCategoryBudgetTitle": "Supprimer votre budget de catégorie?"
-
+  "confirmDeleteCategoryBudgetTitle": "Supprimer votre budget de catégorie?",
+  "budgetRequired": "Ce champ est requis.",
+  "budgetPositive": "Veuillez entrer un montant positif.",
+  "monthlyBudgetExceeded": "Vous ne pouvez pas dépasser votre budget mensuel.",
+  "confirmMonthlyBudgetExceededTitle": "Budget mensuel dépassé",
+  "confirmMonthlyBudgetExceededDescription": "Le montant de la transaction dépasse votre budget mensuel. Ajouter quand même la transaction ?",
+  "confirmCategoryBudgetExceededTitle": "Budget de catégorie dépassé",
+  "confirmCategoryBudgetExceededDescription": "Le montant de la transaction dépasse votre budget de catégorie. Ajouter quand même la transaction ?"
 }

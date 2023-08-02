@@ -6,9 +6,12 @@ import 'package:ecopocket_clean_architecture/features/budget/presentation/contro
 import 'package:ecopocket_clean_architecture/features/budget/presentation/controllers/budget_type_controller.dart';
 import 'package:ecopocket_clean_architecture/features/budget/presentation/controllers/slider_value_controller.dart';
 import 'package:ecopocket_clean_architecture/features/budget/presentation/controllers/update_category_controller.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/providers/home_providers.dart';
 import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:ecopocket_clean_architecture/localization/categories_localizations.dart';
+import 'package:ecopocket_clean_architecture/shared/widgets/async_value_widget.dart';
 import 'package:ecopocket_clean_architecture/utils/input_formatters/amount_input_formatter.dart';
+import 'package:ecopocket_clean_architecture/utils/shared_preferences/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,6 +39,7 @@ class CategoryBudgetDialog extends ConsumerStatefulWidget {
 
 class CategoryBudgetDialogState extends ConsumerState<CategoryBudgetDialog> {
   late final BudgetTypes _type;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -58,11 +62,16 @@ class CategoryBudgetDialogState extends ConsumerState<CategoryBudgetDialog> {
     final budgetType = ref.watch(budgetTypeProvider(budgetType: _type));
     final sliderValue =
         ref.watch(sliderValueProvider(value: widget.category.budgetPercentage));
+    final monthlyBudget =
+        ref.watch(appSharedPreferenceProvider).getMonthlyBudget();
+    final budgetCategories =
+        ref.watch(getCategoriesProvider(CategoryType.budget));
     return AlertDialog(
         insetPadding: EdgeInsets.zero,
         contentPadding:
             EdgeInsets.only(top: 20.h, right: 25.w, left: 25.w, bottom: 20.h),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.h)),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.h)),
         content: SizedBox(
           width: 300.w,
           child: Column(
@@ -93,53 +102,93 @@ class CategoryBudgetDialogState extends ConsumerState<CategoryBudgetDialog> {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Flexible(
-                    child: TextField(
-                      keyboardType: TextInputType.number,
-                      enabled: budgetType == BudgetTypes.amount,
-                      controller: categoryBudgetTextController,
-                      inputFormatters: [
-                        DecimalTextInputFormatter(),
-                        FilteringTextInputFormatter.deny(RegExp(','))
-                      ],
-                      onChanged: (value) {
-                        ref.read(budgetAmountProvider.notifier).onChange(value);
-                      },
-                      style: GoogleFonts.jost(
-                        color: kGray[900],
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      decoration: InputDecoration(
-                        hintText: context.loc.budget,
-                        hintStyle: GoogleFonts.jost(
-                          color: kGray[400],
-                          fontSize: 16.sp,
-                        ),
-                        suffix: budgetType == BudgetTypes.percentage
-                            ? Text(
-                                NumberFormat.percentPattern()
-                                    .format(sliderValue),
-                                style: GoogleFonts.jost(
-                                  color: kGray[400],
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w400,
+                  AsyncValueWidget(
+                      value: budgetCategories,
+                      data: (data) {
+                        final budgetTotal = data.categories
+                            .where((element) => element != widget.category)
+                            .fold<double>(
+                                0,
+                                (previousValue, element) =>
+                                    previousValue + element.budgetAmount!);
+
+                        return Flexible(
+                          child: Form(
+                            key: _formKey,
+                            child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              enabled: budgetType == BudgetTypes.amount,
+                              controller: categoryBudgetTextController,
+                              inputFormatters: [
+                                DecimalTextInputFormatter(),
+                                FilteringTextInputFormatter.deny(RegExp(','))
+                              ],
+                              onChanged: (value) {
+                                ref
+                                    .read(budgetAmountProvider.notifier)
+                                    .onChange(value);
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return context.loc.budgetRequired;
+                                }
+                                if (double.parse(value) <= 0) {
+                                  return context.loc.budgetPositive;
+                                }
+                                if (budgetTotal + double.parse(value) >
+                                    monthlyBudget) {
+                                  return context.loc.monthlyBudgetExceeded;
+                                }
+                                return null;
+                              },
+                              style: GoogleFonts.jost(
+                                color: budgetType == BudgetTypes.amount
+                                    ? kGray[900]
+                                    : kGray[500],
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              decoration: InputDecoration(
+                                hintText: context.loc.budget,
+                                errorMaxLines: 2,
+                                errorStyle: TextStyle(
+                                  color: kRed,
                                 ),
-                              )
-                            : null,
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: kGray[300]!,
+                                errorBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: kRed,
+                                  ),
+                                ),
+                                hintStyle: GoogleFonts.jost(
+                                  color: kGray[400],
+                                  fontSize: 16.sp,
+                                ),
+                                suffix: budgetType == BudgetTypes.percentage
+                                    ? Text(
+                                        NumberFormat.percentPattern()
+                                            .format(sliderValue),
+                                        style: GoogleFonts.jost(
+                                          color: kGray[400],
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      )
+                                    : null,
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: kGray[300]!,
+                                  ),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: kBlue[500]!,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: kBlue[500]!,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                        );
+                      }),
                   SizedBox(
                     width: 10.w,
                   ),
@@ -187,13 +236,22 @@ class CategoryBudgetDialogState extends ConsumerState<CategoryBudgetDialog> {
                   ),
                   const Spacer(),
                   Switch(
-                    value: budgetType == BudgetTypes.percentage,
-                    activeColor: kGreen,
-                    inactiveTrackColor: kGray[300],
-                    onChanged: (value) => ref
-                        .read(budgetTypeProvider(budgetType: _type).notifier)
-                        .toggle(value),
-                  ),
+                      value: budgetType == BudgetTypes.percentage,
+                      activeColor: kGreen,
+                      inactiveTrackColor: kGray[300],
+                      onChanged: (value) {
+                        if (value) {
+                          categoryBudgetTextController.text = "0";
+                          ref
+                              .read(sliderValueProvider(value: sliderValue)
+                                  .notifier)
+                              .change(0);
+                        }
+                        ref
+                            .read(
+                                budgetTypeProvider(budgetType: _type).notifier)
+                            .toggle(value);
+                      }),
                 ],
               ),
               if (budgetType == BudgetTypes.percentage)
@@ -203,7 +261,7 @@ class CategoryBudgetDialogState extends ConsumerState<CategoryBudgetDialog> {
                       value: sliderValue,
                       activeColor: kBlue,
                       inactiveColor: kBlue.withOpacity(0.1),
-                      stepSize: 0.05,
+                      stepSize: 0.01,
                       numberFormat: NumberFormat.percentPattern(),
                       enableTooltip: true,
                       onChanged: (value) => ref
@@ -231,10 +289,12 @@ class CategoryBudgetDialogState extends ConsumerState<CategoryBudgetDialog> {
           ),
           TextButton(
             onPressed: () {
-              context.pop();
-              ref
-                  .read(updateCategoryProvider.notifier)
-                  .updateCategory(category: widget.category);
+              if (_formKey.currentState!.validate()) {
+                context.pop();
+                ref
+                    .read(updateCategoryProvider.notifier)
+                    .updateCategory(category: widget.category);
+              }
             },
             style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all(kBlue),

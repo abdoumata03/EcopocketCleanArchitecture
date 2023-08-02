@@ -17,33 +17,41 @@ class AmountWidget extends ConsumerWidget {
 
     return Expanded(
       child: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: kGray[200]!,
-                width: 4.h,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 30.w),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: kGray[200]!,
+                  width: 4.h,
+                ),
               ),
             ),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    amount,
-                    style: style.copyWith(height: 1.2),
-                  ),
-                  SizedBox(width: 8.w),
-                  Text('DZD',
-                      style:
-                          GoogleFonts.jost(color: kGray[400], fontSize: 24.sp)),
-                ],
-              ),
-            ],
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Flexible(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          amount,
+                          style: style.copyWith(height: 1.2),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 8.w),
+                    Text('DZD',
+                        style: GoogleFonts.jost(
+                            color: kGray[400], fontSize: 24.sp)),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -20,7 +20,7 @@ class SetMonthlyBudgetButton extends StatelessWidget {
           showDialog(
               context: context,
               builder: ((context) {
-                return MonthlyBudgetDialog();
+                return const MonthlyBudgetDialog();
               }));
         },
         child: Container(

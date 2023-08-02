@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:collection/collection.dart';
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/controller/date_filter_controller.dart';

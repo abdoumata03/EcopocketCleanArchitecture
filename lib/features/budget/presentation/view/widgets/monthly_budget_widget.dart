@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:developer';
+
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/constants/styles.dart';
 import 'package:ecopocket_clean_architecture/features/budget/presentation/view/widgets/confirm_delete_dialog.dart';
@@ -15,6 +17,7 @@ import 'package:ecopocket_clean_architecture/utils/shared_preferences/providers.
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -47,6 +50,7 @@ class MonthlyBudgetWidget extends ConsumerWidget {
             data: (data) {
               final percentage = ref.read(calculatePercentageProvider(
                   amount: data, total: monthlyBudget));
+              log(percentage.toString());
               return Column(
                 children: [
                   Row(
@@ -59,6 +63,12 @@ class MonthlyBudgetWidget extends ConsumerWidget {
                           fontWeight: FontWeight.w400,
                         ),
                       ),
+                      const Spacer(),
+                      if (percentage == 100)
+                        SvgPicture.asset(
+                          'assets/icons/warning.svg',
+                          color: kRed,
+                        ),
                     ],
                   ),
                   SizedBox(
@@ -109,7 +119,7 @@ class MonthlyBudgetWidget extends ConsumerWidget {
                     barRadius: Radius.circular(8.r),
                     percent: percentage / 100,
                     backgroundColor: kGray[200],
-                    progressColor: kGreen,
+                    progressColor: kBlue,
                   ),
                 ],
               );

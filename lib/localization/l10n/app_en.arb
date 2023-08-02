@@ -51,5 +51,12 @@
   "confirmDeleteMonthlyBudgetDescription": "Deleting your monthly budget will also delete your classified budgets.",
   "byPercentage": "By percentage",
   "byPercentageDescription": "Of your monthly budget",
-  "confirmDeleteCategoryBudgetTitle": "Delete your category budget?"
+  "confirmDeleteCategoryBudgetTitle": "Delete your category budget?",
+  "budgetRequired": "This field is required.",
+  "budgetPositive": "Please enter a positive amount.",
+  "monthlyBudgetExceeded": "You can't exceed your monthly budget.",
+  "confirmMonthlyBudgetExceededTitle": "Exceeded monthly budget",
+  "confirmMonthlyBudgetExceededDescription": "The transaction amount exceeds your monthly budget. Add the transaction anyway?",
+  "confirmCategoryBudgetExceededTitle": "Exceeded category budget",
+  "confirmCategoryBudgetExceededDescription": "The transaction amount exceeds your category budget. Add the transaction anyway?"
 }

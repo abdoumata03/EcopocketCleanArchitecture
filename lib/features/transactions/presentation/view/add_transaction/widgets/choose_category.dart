@@ -85,65 +85,72 @@ class ChooseCategory extends ConsumerWidget {
       builder: (context) => Wrap(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
+            padding: EdgeInsets.symmetric(horizontal: 30.w),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  context.loc.categories,
-                  style: GoogleFonts.jost(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w500,
-                      color: kGray[400]),
-                  textAlign: TextAlign.center,
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                  child: Text(
+                    context.loc.chooseCategory,
+                    style: GoogleFonts.jost(
+                      color: kGray[500],
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                SizedBox(height: 20.h),
                 categories.maybeWhen(
                     data: (data) {
-                      return GridView.count(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          crossAxisCount: 3,
-                          children: [
-                            for (var category in data.categories)
-                              InkWell(
-                                onTap: () {
-                                  ref
-                                      .read(chosenCategoryProvider.notifier)
-                                      .setCategory(category);
-                                  context.pop();
-                                },
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                        height: 50.h,
-                                        width: 50.w,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(14.h),
-                                          color:
-                                              Color(int.parse(category.color)),
-                                        ),
-                                        padding: EdgeInsets.all(13.r),
-                                        child: SvgPicture.asset(
-                                          category.icon,
-                                        )),
-                                    SizedBox(height: 10.h),
-                                    Text(
-                                      CategoriesLocalizations.getCategoryName(
-                                          context, category.name),
-                                      style: GoogleFonts.jost(
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w500,
-                                          color: kGray[600]),
-                                      textAlign: TextAlign.center,
-                                    )
-                                  ],
-                                ),
-                              )
-                          ]);
+                      return Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10.h),
+                        child: GridView.count(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            crossAxisCount: 3,
+                            children: [
+                              for (var category in data.categories)
+                                InkWell(
+                                  onTap: () {
+                                    ref
+                                        .read(chosenCategoryProvider.notifier)
+                                        .setCategory(category);
+                                    context.pop();
+                                  },
+                                  borderRadius: BorderRadius.circular(14.h),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                          height: 50.h,
+                                          width: 50.w,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(14.h),
+                                            color: Color(
+                                                int.parse(category.color)),
+                                          ),
+                                          padding: EdgeInsets.all(13.r),
+                                          child: SvgPicture.asset(
+                                            category.icon,
+                                          )),
+                                      SizedBox(height: 10.h),
+                                      Text(
+                                        CategoriesLocalizations.getCategoryName(
+                                            context, category.name),
+                                        style: GoogleFonts.jost(
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: kGray[600]),
+                                        textAlign: TextAlign.center,
+                                      )
+                                    ],
+                                  ),
+                                )
+                            ]),
+                      );
                     },
                     orElse: () =>
                         const Center(child: CircularProgressIndicator()))

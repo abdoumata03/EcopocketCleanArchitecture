@@ -27,7 +27,6 @@ Future<double> todaysTotal(TodaysTotalRef ref) async {
 Future<double> yesterdaysTotal(YesterdaysTotalRef ref) async {
   final repo = ref.watch(transactionsRepositoryProvider);
   final ystdCategories = await repo.getYesterdayCategoriesInfo();
-  // ignore: unused_local_variable
   double totalAmount = 0;
   for (final category in ystdCategories.categoryInfoList) {
     totalAmount += category.total;

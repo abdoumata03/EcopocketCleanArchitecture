@@ -18,6 +18,7 @@ class MonthlyBudgetDialog extends ConsumerStatefulWidget {
 
 class MonthlyBudgetDialogState extends ConsumerState<MonthlyBudgetDialog> {
   final TextEditingController _controller = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -47,32 +48,44 @@ class MonthlyBudgetDialogState extends ConsumerState<MonthlyBudgetDialog> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Flexible(
-                  child: TextField(
-                    keyboardType: TextInputType.number,
-                    controller: _controller,
-                    inputFormatters: [
-                      DecimalTextInputFormatter(),
-                      FilteringTextInputFormatter.deny(RegExp(','))
-                    ],
-                    style: GoogleFonts.jost(
-                      color: kGray[900],
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    decoration: InputDecoration(
-                      hintText: context.loc.budget,
-                      hintStyle: GoogleFonts.jost(
-                        color: kGray[400],
+                  child: Form(
+                    key: _formKey,
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      controller: _controller,
+                      inputFormatters: [
+                        DecimalTextInputFormatter(),
+                        FilteringTextInputFormatter.deny(RegExp(','))
+                      ],
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return context.loc.budgetRequired;
+                        }
+                        if (double.parse(value) <= 0) {
+                          return context.loc.budgetPositive;
+                        }
+                        return null;
+                      },
+                      style: GoogleFonts.jost(
+                        color: kGray[900],
                         fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
                       ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: kGray[300]!,
+                      decoration: InputDecoration(
+                        hintText: context.loc.budget,
+                        hintStyle: GoogleFonts.jost(
+                          color: kGray[400],
+                          fontSize: 16.sp,
                         ),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(
-                          color: kBlue[500]!,
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: kGray[300]!,
+                          ),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: kBlue[500]!,
+                          ),
                         ),
                       ),
                     ),
@@ -118,10 +131,13 @@ class MonthlyBudgetDialogState extends ConsumerState<MonthlyBudgetDialog> {
         ),
         TextButton(
           onPressed: () {
-            sharedPrefs.setMonthlyBudget(double.parse(_controller.text.trim()));
-            ref.invalidate(appSharedPreferenceProvider);
-            ref.read(appSharedPreferenceProvider);
-            context.pop();
+            if (_formKey.currentState!.validate()) {
+              sharedPrefs
+                  .setMonthlyBudget(double.parse(_controller.text.trim()));
+              ref.invalidate(appSharedPreferenceProvider);
+              ref.read(appSharedPreferenceProvider);
+              context.pop();
+            }
           },
           style: ButtonStyle(
             foregroundColor: MaterialStateProperty.all(kBlue),
