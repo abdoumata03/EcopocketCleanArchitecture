@@ -4,4 +4,5 @@ import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_model.d
 abstract class BudgetDatabase {
   Future<void> updateBudget(CategoryEntity categoryEntity);
   Future<dynamic> categorySpending(int categoryId, DateRange dateRange);
+  Future<void> resetBudget();
 }

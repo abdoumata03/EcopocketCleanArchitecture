@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/constants/styles.dart';
 import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
@@ -53,9 +55,9 @@ class CustomBottomNavigationBar extends ConsumerWidget {
           buildAppBarItem(
             ref: ref,
             index: 3,
-            icon: 'assets/icons/profile.svg',
-            selectedIcon: 'assets/icons/profile_filled.svg',
-            page: context.loc.profile,
+            icon: 'assets/icons/more.svg',
+            selectedIcon: 'assets/icons/more_filled.svg',
+            page: context.loc.more,
           ),
         ],
       ),
@@ -68,6 +70,7 @@ class CustomBottomNavigationBar extends ConsumerWidget {
       required String icon,
       required String selectedIcon,
       required String page}) {
+    bool isSelected = index == ref.watch(pageIndexChangerProvider);
     return InkWell(
       onTap: () =>
           ref.read(pageIndexChangerProvider.notifier).changePageIndex(index),
@@ -77,21 +80,18 @@ class CustomBottomNavigationBar extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.min,
           children: [
-            SvgPicture.asset((index == ref.watch(pageIndexChangerProvider))
-                ? selectedIcon
-                : icon),
+            SvgPicture.asset(
+              isSelected ? selectedIcon : icon,
+              color: isSelected ? kBlue : kGray[400],
+            ),
             Padding(
               padding: EdgeInsets.only(top: 5.h),
               child: Text(
                 page,
                 style: GoogleFonts.jost(
                   fontSize: 12.sp,
-                  fontWeight: (index == ref.watch(pageIndexChangerProvider)
-                      ? FontWeight.w600
-                      : FontWeight.w500),
-                  color: (index == ref.watch(pageIndexChangerProvider))
-                      ? kBlue
-                      : kGray[400],
+                  fontWeight: (isSelected ? FontWeight.w600 : FontWeight.w500),
+                  color: isSelected ? kBlue : kGray[400],
                 ),
               ),
             ),

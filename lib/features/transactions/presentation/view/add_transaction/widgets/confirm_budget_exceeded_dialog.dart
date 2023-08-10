@@ -31,7 +31,7 @@ class ConfirmBudgetExceededDialog extends ConsumerWidget {
       content: SizedBox(
         width: 300.w,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
@@ -57,9 +57,6 @@ class ConfirmBudgetExceededDialog extends ConsumerWidget {
       ),
       actionsAlignment: MainAxisAlignment.spaceAround,
       actions: [
-        const Spacer(
-          flex: 1,
-        ),
         TextButton(
           onPressed: () => context.pop(),
           style: ButtonStyle(
@@ -72,9 +69,6 @@ class ConfirmBudgetExceededDialog extends ConsumerWidget {
             ),
           ),
           child: Text(context.loc.cancel),
-        ),
-        const Spacer(
-          flex: 2,
         ),
         TextButton(
           onPressed: () {
@@ -100,9 +94,6 @@ class ConfirmBudgetExceededDialog extends ConsumerWidget {
           child: Text(
             context.loc.confirm,
           ),
-        ),
-        const Spacer(
-          flex: 1,
         ),
       ],
     );

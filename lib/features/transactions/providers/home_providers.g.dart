@@ -270,7 +270,7 @@ class GetCategoryTransactionsProvider
   }
 }
 
-String _$getCategoriesHash() => r'c81f25d04584d97e18da517aefe522cb9be2536a';
+String _$getCategoriesHash() => r'83e4adc37ad0d7d3a16b4d0054e926d133d22c4d';
 typedef GetCategoriesRef = AutoDisposeFutureProviderRef<CategoryList>;
 
 /// See also [getCategories].

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:ecopocket_clean_architecture/features/budget/domain/model/category_list.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/transaction_list.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/module.dart';
@@ -76,7 +74,6 @@ Future<CategoryList> getCategories(GetCategoriesRef ref,
     case CategoryType.budget:
       return categories.haveBudgetCategories;
     case CategoryType.noBudget:
-      log('HERE');
       return categories.noBudgetCategories;
     default:
       return categories;

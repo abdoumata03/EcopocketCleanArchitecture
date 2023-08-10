@@ -9,6 +9,7 @@ import 'package:ecopocket_clean_architecture/features/budget/presentation/view/w
 import 'package:ecopocket_clean_architecture/features/budget/presentation/view/widgets/modal_button.dart';
 import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:ecopocket_clean_architecture/localization/categories_localizations.dart';
+import 'package:ecopocket_clean_architecture/localization/string_hardcoded.dart';
 import 'package:ecopocket_clean_architecture/shared/widgets/async_value_widget.dart';
 import 'package:ecopocket_clean_architecture/utils/date_utils/date_periods.dart';
 import 'package:ecopocket_clean_architecture/utils/date_utils/date_range_provider.dart';
@@ -155,7 +156,7 @@ class CategoryBudgetWidget extends ConsumerWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.h),
                   child: Text(
-                    "Budget classé",
+                    "Budget classé".hardcoded,
                     style: GoogleFonts.jost(
                       color: kGray[500],
                       fontSize: 14.sp,

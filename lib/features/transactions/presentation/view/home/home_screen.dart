@@ -7,7 +7,6 @@ import 'package:ecopocket_clean_architecture/localization/app_localizations_cont
 import 'package:ecopocket_clean_architecture/shared/widgets/empty_transactions.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/home/widgets/spent_this_week.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/home/widgets/today_categories_widget.dart';
-import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/home/widgets/view_all_transactions.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/home/widgets/yesterday_categories_widget.dart';
 import 'package:ecopocket_clean_architecture/utils/multi_async_extension.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +40,14 @@ class HomePage extends ConsumerWidget {
                   color: kGray[900],
                 ),
               ),
+              const Spacer(),
+              IconButton(
+                onPressed: () => context.push("/all_transactions"),
+                icon: SvgPicture.asset(
+                  'assets/icons/history.svg',
+                  color: kGray[900],
+                ),
+              )
             ],
           ),
           backgroundColor: kGray[50],
@@ -60,11 +67,6 @@ class HomePage extends ConsumerWidget {
               padding: EdgeInsets.only(right: 20.w, left: 20.w, bottom: 25.h),
               children: [
                 const SpentThisWeek(),
-                SizedBox(height: 14.h),
-                buildViewAllTransactions(
-                  onTap: () => context.push("/all_transactions"),
-                  title: context.loc.viewAllTransactions,
-                ),
                 SizedBox(height: 14.h),
                 (todaysCategoriesList.categoryInfoList.isEmpty &&
                         yesterdaysCategoriesList.categoryInfoList.isEmpty)

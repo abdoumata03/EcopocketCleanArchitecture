@@ -27,11 +27,14 @@ class BudgetDatabaseImplementation implements BudgetDatabase {
     return query;
   }
 
-  // @override
-  // Future<CategoryEntity> getCategory(int categoryId) async {
-  //   final query = await database.query(CategoryTable.tableName,
-  //       where: '${CategoryTable.columnId} = ?', whereArgs: [categoryId]);
-
-  //   return query;
-  // }
+  @override
+  Future<void> resetBudget() async {
+    await database.rawUpdate('''
+        UPDATE ${CategoryTable.tableName}
+        SET ${CategoryTable.columnBudgetAmount} = NULL,
+        ${CategoryTable.columnBudgetType} = NULL,
+        ${CategoryTable.columnBudgetPercentage} = NULL
+        WHERE ${CategoryTable.columnBudgetAmount} IS NOT NULL;
+    ''');
+  }
 }

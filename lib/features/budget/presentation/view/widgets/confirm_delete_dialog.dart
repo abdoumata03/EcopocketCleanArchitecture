@@ -1,4 +1,6 @@
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
+import 'package:ecopocket_clean_architecture/features/budget/domain/module.dart';
+import 'package:ecopocket_clean_architecture/features/transactions/providers/home_providers.dart';
 import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:ecopocket_clean_architecture/utils/shared_preferences/providers.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +24,7 @@ class ConfirmDeleteBudgetDialog extends ConsumerWidget {
       content: SizedBox(
         width: 300.w,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
@@ -65,6 +67,8 @@ class ConfirmDeleteBudgetDialog extends ConsumerWidget {
             ref.read(appSharedPreferenceProvider).deleteMonthlyBudget();
             ref.invalidate(appSharedPreferenceProvider);
             ref.read(appSharedPreferenceProvider);
+            ref.read(budgetRepositoryProvider).resetBudget();
+            ref.invalidate(getCategoriesProvider(CategoryType.budget));
             context.pop();
           },
           style: ButtonStyle(

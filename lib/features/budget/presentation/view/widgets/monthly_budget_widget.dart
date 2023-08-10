@@ -1,7 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-import 'dart:developer';
-
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/constants/styles.dart';
 import 'package:ecopocket_clean_architecture/features/budget/presentation/view/widgets/confirm_delete_dialog.dart';
@@ -50,7 +48,6 @@ class MonthlyBudgetWidget extends ConsumerWidget {
             data: (data) {
               final percentage = ref.read(calculatePercentageProvider(
                   amount: data, total: monthlyBudget));
-              log(percentage.toString());
               return Column(
                 children: [
                   Row(
@@ -65,9 +62,12 @@ class MonthlyBudgetWidget extends ConsumerWidget {
                       ),
                       const Spacer(),
                       if (percentage == 100)
-                        SvgPicture.asset(
-                          'assets/icons/warning.svg',
-                          color: kRed,
+                        Tooltip(
+                          message: context.loc.monthlyBudgetExceeded,
+                          child: SvgPicture.asset(
+                            'assets/icons/warning.svg',
+                            color: kRed,
+                          ),
                         ),
                     ],
                   ),

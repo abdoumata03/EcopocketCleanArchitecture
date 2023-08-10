@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "123431327043",
+    "project_id": "ecopocket-ce20f",
+    "storage_bucket": "ecopocket-ce20f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123431327043:android:6100c480d8d0c7c241cbf6",
+        "android_client_info": {
+          "package_name": "com.example.ecopocket_clean_architecture"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123431327043-445k66pe30bprlrboip78pp09u03poea.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUxDQuQFVBSbbTucITF7QFEfdknxRhm08"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "123431327043-445k66pe30bprlrboip78pp09u03poea.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

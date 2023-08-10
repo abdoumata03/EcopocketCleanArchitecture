@@ -2,6 +2,7 @@
 
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/features/budget/domain/model/category_list.dart';
+import 'package:ecopocket_clean_architecture/features/budget/presentation/view/widgets/budget_hint.dart';
 import 'package:ecopocket_clean_architecture/features/budget/presentation/view/widgets/category_budget_dialog.dart';
 import 'package:ecopocket_clean_architecture/features/budget/presentation/view/widgets/category_budget_widget.dart';
 import 'package:ecopocket_clean_architecture/features/budget/presentation/view/widgets/empty_budget.dart';
@@ -18,11 +19,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Budget extends ConsumerWidget {
+class Budget extends ConsumerStatefulWidget {
   const Budget({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  BudgetState createState() => BudgetState();
+}
+
+class BudgetState extends ConsumerState<Budget> {
+  bool isBudgetHintVisible = true;
+  @override
+  Widget build(BuildContext context) {
     final monthlyBudget =
         ref.watch(appSharedPreferenceProvider).getMonthlyBudget();
     final noBudgetCategories =
@@ -71,6 +78,10 @@ class Budget extends ConsumerWidget {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
+                if (isBudgetHintVisible)
+                  BudgetHint(
+                    onTap: () => setState(() => isBudgetHintVisible = false),
+                  ),
                 (monthlyBudget == null)
                     ? const EmptyBudget()
                     : const MonthlyBudgetWidget(),

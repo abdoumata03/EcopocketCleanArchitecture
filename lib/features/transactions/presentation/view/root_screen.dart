@@ -3,6 +3,7 @@
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
 import 'package:ecopocket_clean_architecture/features/analytics/presentation/view/analytics.dart';
 import 'package:ecopocket_clean_architecture/features/budget/presentation/view/budget.dart';
+import 'package:ecopocket_clean_architecture/features/settings/presentation/view/settings_screen.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/repository/transactions_repository.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/home/home_screen.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/widgets/custom_navigation_bar.dart';
@@ -18,6 +19,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+GlobalKey scaffoldKey = GlobalKey();
+
 class RootPage extends ConsumerWidget {
   const RootPage({super.key});
 
@@ -30,6 +33,7 @@ class RootPage extends ConsumerWidget {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        key: scaffoldKey,
         drawer: const MyDrawer(),
         floatingActionButton: FloatingActionButton(
           backgroundColor: kBlue,
@@ -55,7 +59,7 @@ class RootPage extends ConsumerWidget {
             Center(child: HomePage()),
             Center(child: Analytics()),
             Center(child: Budget()),
-            Center(child: Text('Profile Page'))
+            Center(child: Settings())
           ],
         )),
       ),

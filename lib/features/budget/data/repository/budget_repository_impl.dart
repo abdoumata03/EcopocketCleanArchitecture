@@ -24,4 +24,9 @@ class BudgetRepositoryImplementation implements BudgetRepository {
     }
     return total.toDouble();
   }
+
+  @override
+  Future<void> resetBudget() async {
+    await database.resetBudget();
+  }
 }

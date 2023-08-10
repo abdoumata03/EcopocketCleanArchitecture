@@ -28,6 +28,8 @@ dependencies:
   step_progress_indicator: ^1.0.2
   percent_indicator: ^4.2.3
   syncfusion_flutter_sliders: ^22.2.5
+  firebase_core: ^2.15.0
+  firebase_messaging: ^14.6.5
 
 dev_dependencies:
   flutter_test:
