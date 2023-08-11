@@ -1,4 +1,5 @@
 import 'package:ecopocket_clean_architecture/constants/colors.dart';
+import 'package:ecopocket_clean_architecture/localization/app_localizations_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -32,10 +33,10 @@ class BudgetHint extends StatelessWidget {
           SizedBox(width: 20.w),
           Flexible(
             child: Text(
-              'Click the plus icon to add a monthly budget for each of your spending categories.',
+              context.loc.budgetHint,
               style: GoogleFonts.jost(
                 color: Colors.white,
-                fontSize: 14.sp,
+                fontSize: 15.sp,
                 fontWeight: FontWeight.w400,
               ),
               maxLines: 2,

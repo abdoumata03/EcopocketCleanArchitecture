@@ -19,8 +19,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-GlobalKey scaffoldKey = GlobalKey();
-
 class RootPage extends ConsumerWidget {
   const RootPage({super.key});
 
@@ -33,7 +31,6 @@ class RootPage extends ConsumerWidget {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
-        key: scaffoldKey,
         drawer: const MyDrawer(),
         floatingActionButton: FloatingActionButton(
           backgroundColor: kBlue,

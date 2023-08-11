@@ -30,6 +30,13 @@ dependencies:
   syncfusion_flutter_sliders: ^22.2.5
   firebase_core: ^2.15.0
   firebase_messaging: ^14.6.5
+  url_launcher: ^6.1.12
+  share_plus: ^7.1.0
+  app_settings: ^5.0.0
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.1
+  fluentui_system_icons: ^1.1.208
+  dropdown_button2: ^2.3.7
 
 dev_dependencies:
   flutter_test:
@@ -51,3 +58,17 @@ flutter:
 scripts:
   build: flutter pub run build_runner build --delete-conflicting-outputs
   watch: flutter pub run build_runner watch
+
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/logo.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/logo_foreground.png"
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: "assets/splash_logo.png"
+  android: true
+  ios: true

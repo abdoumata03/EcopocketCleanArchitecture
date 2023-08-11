@@ -58,5 +58,14 @@
   "confirmMonthlyBudgetExceededTitle": "Exceeded monthly budget",
   "confirmMonthlyBudgetExceededDescription": "The transaction amount exceeds your monthly budget. Add the transaction anyway?",
   "confirmCategoryBudgetExceededTitle": "Exceeded category budget",
-  "confirmCategoryBudgetExceededDescription": "The transaction amount exceeds your category budget. Add the transaction anyway?"
+  "confirmCategoryBudgetExceededDescription": "The transaction amount exceeds your category budget. Add the transaction anyway?",
+  "budgetHint": "Click the plus icon to add a monthly budget for each of your spending categories.",
+  "preferences": "Preferences",
+  "wallets": "Wallets",
+  "notifications": "Notifications",
+  "dataBackup": "Data backup",
+  "shareApp": "Share the app",
+  "feedback": "Feedback",
+  "featureAvailableSoon": "Feature available soon...",
+  "thanksForSharing": "Thanks for sharing the app!"
 }

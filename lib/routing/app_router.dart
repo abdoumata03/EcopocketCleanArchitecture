@@ -1,3 +1,4 @@
+import 'package:ecopocket_clean_architecture/features/settings/presentation/view/preferences.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/domain/model/category_info.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/add_transaction/add_transaction.dart';
 import 'package:ecopocket_clean_architecture/features/transactions/presentation/view/all_transactions/all_transactions.dart';
@@ -14,6 +15,7 @@ enum AppRoute {
   cateogryTransactions,
   newTransaction,
   allTransactions,
+  preferences,
 }
 
 @Riverpod(keepAlive: true)
@@ -40,28 +42,13 @@ GoRouter goRouter(GoRouterRef ref) {
     GoRoute(
       path: '/new_transaction/:type',
       name: AppRoute.newTransaction.name,
-      pageBuilder: (context, state) => CustomTransitionPage(
-          key: state.pageKey,
-          child: NewTransaction(
-            type: state.pathParameters['type']!,
-          ),
-          transitionDuration: const Duration(milliseconds: 200),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            final curveAnimation = CurvedAnimation(
-              parent: animation,
-              curve: Curves.easeOut,
-            );
-
-            final offsetAnimation = Tween<Offset>(
-              begin: const Offset(1.0, 0.0),
-              end: Offset.zero,
-            ).animate(curveAnimation);
-
-            return SlideTransition(
-              position: offsetAnimation,
-              child: child,
-            );
-          }),
+      pageBuilder: (context, state) => buildRtlTransitionPage(
+        context: context,
+        state: state,
+        child: NewTransaction(
+          type: state.pathParameters['type']!,
+        ),
+      ),
     ),
     GoRoute(
       path: '/all_transactions',
@@ -71,5 +58,37 @@ GoRouter goRouter(GoRouterRef ref) {
         child: AllTransactions(),
       ),
     ),
+    GoRoute(
+      path: '/preferences',
+      name: AppRoute.preferences.name,
+      pageBuilder: (context, state) => buildRtlTransitionPage(
+          context: context, state: state, child: const Preferences()),
+    )
   ]);
+}
+
+CustomTransitionPage<dynamic> buildRtlTransitionPage(
+    {required BuildContext context,
+    required GoRouterState state,
+    required Widget child}) {
+  return CustomTransitionPage(
+      key: state.pageKey,
+      child: child,
+      transitionDuration: const Duration(milliseconds: 200),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        final curveAnimation = CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeOut,
+        );
+
+        final offsetAnimation = Tween<Offset>(
+          begin: const Offset(1.0, 0.0),
+          end: Offset.zero,
+        ).animate(curveAnimation);
+
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
+        );
+      });
 }

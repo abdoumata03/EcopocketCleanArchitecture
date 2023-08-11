@@ -58,5 +58,14 @@
   "confirmMonthlyBudgetExceededTitle": "Budget mensuel dépassé",
   "confirmMonthlyBudgetExceededDescription": "Le montant de la transaction dépasse votre budget mensuel. Ajouter quand même la transaction ?",
   "confirmCategoryBudgetExceededTitle": "Budget de catégorie dépassé",
-  "confirmCategoryBudgetExceededDescription": "Le montant de la transaction dépasse votre budget de catégorie. Ajouter quand même la transaction ?"
+  "confirmCategoryBudgetExceededDescription": "Le montant de la transaction dépasse votre budget de catégorie. Ajouter quand même la transaction ?",
+  "budgetHint": "Cliquez sur le plus pour ajouter un budget mensuel pour vos catégories.",
+  "preferences": "Préférences",
+  "wallets": "Portefeuilles",
+  "notifications": "Notifications",
+  "dataBackup": "Sauvegarde des données",
+  "shareApp": "Partager l'application",
+  "feedback": "Commentaires",
+  "featureAvailableSoon": "Fonctionnalité bientôt disponible...",
+  "thanksForSharing": "Merci d'avoir partagé l'application !"
 }
