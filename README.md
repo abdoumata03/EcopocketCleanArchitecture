@@ -33,7 +33,7 @@ This app uses **Riverpod 2.0**, a powerful state management solution for Flutter
 
 ## 📸 Screenshots
 
-![App Platorm](https://ibb.co/1dB6VRX)
+![App Platorm](https://i.ibb.co/rcqsP5p/Ecopocket-Mockup.png)
 
 ## 🛠️ Installation
 
